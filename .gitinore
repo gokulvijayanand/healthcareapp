@@ -1,0 +1,62 @@
+# General
+.DS_Store
+*.lock
+*.log
+*.bak
+*.tmp
+*.swp
+*.swo
+thumbs.db
+
+# Dart/Flutter
+.dart_tool/
+.flutter-plugins
+.flutter-plugins-dependencies
+.packages
+.pub-cache/
+.pub/
+/build/
+# If you're using Flutter plugins, you may want to ignore the Pods directory in iOS.
+# /ios/Pods/
+
+# Android Studio (for Kotlin/Java)
+.idea/
+.gradle/
+/local.properties
+
+# Android build output
+/android/.gradle
+/android/build/
+/android/app/build/
+
+# iOS (if using Flutter for iOS development)
+/ios/.symlinks/
+/ios/Flutter/flutter_export_environment.sh
+/ios/Flutter/Generated.xcconfig
+/ios/Flutter/ephemeral/
+/ios/Flutter/.last_build_id
+/ios/build/
+/ios/Pods/ # Uncomment this line if you've decided to ignore the Pods directory
+/ios/Runner.xcworkspace/xcuserdata/
+/ios/Runner.xcworkspace/contents.xcworkspacedata
+/ios/Runner.xcodeproj/project.xcworkspace/xcuserdata/
+/ios/Runner.xcodeproj/xcuserdata/
+/ios/Runner.xcodeproj/project.xcworkspace/contents.xcworkspacedata
+*.mode1v3
+*.mode2v3
+*.perspectivev3
+*.pbxuser
+!default.mode1v3
+!default.mode2v3
+!default.perspectivev3
+!default.pbxuser
+
+# VSCode
+.vscode/
+
+# Other files and directories to ignore
+keys.jks
+keys.properties
+*.jks
+*.keystore
+*.pem
