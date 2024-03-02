@@ -1,0 +1,37 @@
+import 'package:flutter/material.dart';
+import '../models/doctor.dart'; // Make sure the path to Doctor model is correct
+
+class DoctorDetailPage extends StatelessWidget {
+  final Doctor doctor;
+
+  const DoctorDetailPage({Key? key, required this.doctor}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(
+        title: Text(doctor.name),
+      ),
+      body: SingleChildScrollView( // Use SingleChildScrollView for a simple scrollable layout
+        child: Column(
+          children: [
+            Image.asset(doctor.image, width: double.infinity, fit: BoxFit.cover),
+            Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text('Name: ${doctor.name}', style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold)),
+                  Text('Specialization: ${doctor.specialization}', style: TextStyle(fontSize: 20)),
+                  Text('Qualification: ${doctor.qualification}', style: TextStyle(fontSize: 18)),
+                  Text('Email: ${doctor.mailid}', style: TextStyle(fontSize: 16)),
+                  Text('Office No: ${doctor.officeNo}', style: TextStyle(fontSize: 16)),
+                ],
+              ),
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+}
