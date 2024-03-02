@@ -6,10 +6,15 @@ void main() {
 }
 
 class MyApp extends StatelessWidget {
+  bool _isDarkMode = false;
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      home: SplashScreen(),
+      title: 'Health Care APP',
+      theme: AppThemes.lightTheme,
+      darkTheme: AppThemes.darkTheme,
+      themeMode: _isDarkMode ? ThemeMode.dark : ThemeMode.light,
+      home:SplashScreen(),
     );
   }
 }
