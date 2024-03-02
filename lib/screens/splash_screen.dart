@@ -14,7 +14,7 @@ class SplashScreen extends StatefulWidget {
 class _SplashScreenState extends State<SplashScreen> {
   @override
   void initState() {
-    Future.delayed(Duration(seconds: 2)).then((_) {
+    Future.delayed(Duration(seconds: 5)).then((_) {
       Navigator.pushReplacement(context, MaterialPageRoute(builder: (_) => HomePage()));
     });
     super.initState();
@@ -27,7 +27,7 @@ class _SplashScreenState extends State<SplashScreen> {
           Container(
             decoration: BoxDecoration(
               image: DecorationImage(
-                image: AssetImage("assets/doctor_face.jpg"),
+                image: AssetImage("assets/images/doctor_face.jpg"),
                 fit: BoxFit.fill,
               ),
             ),
@@ -55,7 +55,7 @@ class _SplashScreenState extends State<SplashScreen> {
                 flex: 2,
                 child: SizedBox(),
               ),
-              Image.asset("assets/heartbeat.png", color: Colors.white,height: 100,),
+              Image.asset("assets/images/heartbeat.png", color: Colors.white,height: 100,),
               Text(
                 "Time Health",
                 style: TextStyles.h1Style.white,
