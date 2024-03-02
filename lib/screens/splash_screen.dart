@@ -1,39 +1,76 @@
 import 'package:flutter/material.dart';
 import 'home_page.dart';
+import 'package:myflutterproject/theams/light_color.dart';
+import 'package:myflutterproject/theams/text_styles.dart';
+import 'package:myflutterproject/theams/extention.dart';
 
 class SplashScreen extends StatefulWidget {
-  const SplashScreen({super.key});
+  SplashScreen({key}) : super(key: key);
 
   @override
-  State<SplashScreen> createState() => _SplashScreenState();
+  _SplashScreenState createState() => _SplashScreenState();
 }
 
 class _SplashScreenState extends State<SplashScreen> {
   @override
-  void initState(){
+  void initState() {
+    Future.delayed(Duration(seconds: 2)).then((_) {
+      Navigator.pushReplacement(context, MaterialPageRoute(builder: (_) => HomePage()));
+    });
     super.initState();
-    _navigitaToHome();
-  }
-  _navigitaToHome() async{
-    await Future.delayed(Duration(seconds: 5),() {});
-    Navigator.pushReplacement(
-        context,
-        MaterialPageRoute(builder: (context)=>HomePage()),
-    );
   }
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Center(
-          child:Column(
+      body: Stack(
+        children: <Widget>[
+          Container(
+            decoration: BoxDecoration(
+              image: DecorationImage(
+                image: AssetImage("assets/doctor_face.jpg"),
+                fit: BoxFit.fill,
+              ),
+            ),
+          ),
+          Positioned.fill(
+            child: Opacity(
+              opacity: .6,
+              child: Container(
+                decoration: BoxDecoration(
+                  gradient: LinearGradient(
+                      colors: [LightColor.purpleExtraLight, LightColor.purple],
+                      begin: Alignment.topCenter,
+                      end: Alignment.bottomCenter,
+                      tileMode: TileMode.mirror,
+                      stops: [.5, 6]),
+                ),
+              ),
+            ),
+          ),
+          Column(
             mainAxisAlignment: MainAxisAlignment.center,
+            crossAxisAlignment: CrossAxisAlignment.center,
             children: <Widget>[
-              Text('Healthcare',style: TextStyle(fontSize: 20 ,fontWeight: FontWeight.w900),),
-              SizedBox(height: 100),
-              Image.asset('assets/images/healthcareLogo.png'),
-
+              Expanded(
+                flex: 2,
+                child: SizedBox(),
+              ),
+              Image.asset("assets/heartbeat.png", color: Colors.white,height: 100,),
+              Text(
+                "Time Health",
+                style: TextStyles.h1Style.white,
+              ),
+              Text(
+                "By healthcare Evolution",
+                style: TextStyles.bodySm.white.bold,
+              ),
+              Expanded(
+                flex: 7,
+                child: SizedBox(),
+              ),
             ],
-          )
+          ).alignTopCenter,
+        ],
       ),
     );
   }
