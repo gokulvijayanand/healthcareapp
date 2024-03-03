@@ -12,7 +12,7 @@ import 'specialization_list_page.dart';
    Widget build(BuildContext context) {
      return Scaffold(
        appBar: AppBar(
-         title: Text("H O M E"),
+         title: Text("HOME"),
 
        ),
        body: Column(

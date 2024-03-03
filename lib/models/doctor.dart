@@ -1,4 +1,5 @@
 class Doctor {
+  final String id;
   final String name;
   final String qualification;
   final String specialization;
@@ -7,6 +8,7 @@ class Doctor {
   final String officeNo;
 
   Doctor({
+    required this.id,
     required this.name,
     required this.qualification,
     required this.specialization,
@@ -17,6 +19,7 @@ class Doctor {
 
   factory Doctor.fromJson(Map<String, dynamic> json) {
     return Doctor(
+      id:json['id'],
       name: json['name'],
       qualification: json['qualification'],
       specialization: json['specialization'],

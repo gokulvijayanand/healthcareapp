@@ -1,0 +1,34 @@
+[
+  {
+    "doctorId": "1",
+    "date": "2024-03-04",
+    "timeSlot": "9:00 AM to 10:30 AM",
+    "slot": "1",
+    "patientName": "Alice Johnson",
+    "reason": "Routine Check-up"
+  },
+  {
+    "doctorId": "2",
+    "date": "2024-03-05",
+    "timeSlot": "11:00 AM to 12:30 PM",
+    "slot": "2",
+    "patientName": "Bob Smith",
+    "reason": "Consultation"
+  },
+  {
+    "doctorId": "1",
+    "date": "2024-03-06",
+    "timeSlot": "4:00 PM to 5:30 PM",
+    "slot": "3",
+    "patientName": "Charlie Davis",
+    "reason": "Follow-up"
+  },
+  {
+    "doctorId": "3",
+    "date": "2024-03-05",
+    "timeSlot": "6:00 PM to 7:30 PM",
+    "slot": "4",
+    "patientName": "Diana Allen",
+    "reason": "New Symptoms"
+  }
+]

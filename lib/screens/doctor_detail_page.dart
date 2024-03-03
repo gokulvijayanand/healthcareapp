@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import '../models/doctor.dart'; // Make sure the path to Doctor model is correct
+import '../models/doctor.dart';
+import 'appointment_page.dart'; // Make sure the path to Doctor model is correct
 
 class DoctorDetailPage extends StatelessWidget {
   final Doctor doctor;
@@ -26,6 +27,16 @@ class DoctorDetailPage extends StatelessWidget {
                   Text('Qualification: ${doctor.qualification}', style: TextStyle(fontSize: 18)),
                   Text('Email: ${doctor.mailid}', style: TextStyle(fontSize: 16)),
                   Text('Office No: ${doctor.officeNo}', style: TextStyle(fontSize: 16)),
+                  Text('ID: ${doctor.id}', style: TextStyle(fontSize: 16)),
+                  ElevatedButton(
+                    onPressed: () {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(builder: (context) => AppointmentPage(doctor: doctor)),
+                      );
+                    },
+                    child: Text('Book Appointment'),
+                  ),
                 ],
               ),
             ),
