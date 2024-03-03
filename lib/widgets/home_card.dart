@@ -18,24 +18,24 @@ class HomeCard extends StatelessWidget {
     return GestureDetector(
       onTap: onTap,
       child: Card(
+        color: Colors.deepPurple.shade300,
         shape: RoundedRectangleBorder( // This rounds the corners of the Card
-        borderRadius: BorderRadius.circular(10.0), // Adjust the radius as needed
+        borderRadius: BorderRadius.circular(15.0), // Adjust the radius as needed
         ),
         child: Container(
-          color: Colors.purple,
           width: double.infinity,
           height: MediaQuery.of(context).size.height * 0.2, // 10% of the body height
           padding: EdgeInsets.all(10),
-          child: Row(
+          child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
               Lottie.asset(lottiePath,
-                width: 50,
-                height: 70,
+                width: 90,
+                height: 120,
                 fit: BoxFit.fill,
               ),
               SizedBox(width: 10),
-              Text(title, style: TextStyle(fontSize: 12, fontWeight: FontWeight.bold)),
+              Text(title, style: TextStyle(fontSize: 15, color: Colors.white, fontWeight: FontWeight.bold)),
             ],
           ),
         ),

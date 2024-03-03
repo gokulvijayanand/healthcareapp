@@ -1,3 +1,4 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:lottie/lottie.dart';
 import 'home_page.dart';
@@ -28,7 +29,7 @@ class _SplashScreenState extends State<SplashScreen> {
           Container(
             decoration: BoxDecoration(
               image: DecorationImage(
-                image: AssetImage("assets/images/doctor_face.jpg"),
+                image: AssetImage("assets/images/doctor_sp.jpg"),
                 fit: BoxFit.fill,
               ),
             ),
@@ -56,20 +57,28 @@ class _SplashScreenState extends State<SplashScreen> {
                 flex: 2,
                 child: SizedBox(),
               ),
+              SizedBox(height: 275),
+              //Image.asset("assets/images/heartbeat.png", color: Colors.white,height: 100,),
+              Card(
+                shape: RoundedRectangleBorder( // This rounds the corners of the Card
+                borderRadius: BorderRadius.circular(12.0),
+                ),
+                color: Colors.deepPurple,
+
+                child: Text(
+                  "Health Care",
+                  style: TextStyle(color: Colors.white,fontSize: 30,fontWeight: FontWeight.w700 )
+                ),
+              ),
+              Text(
+                "By Gokul HealthCare Team",
+                style: TextStyle(color: Colors.deepPurple,fontSize: 30,fontWeight: FontWeight.normal ),
+              ),
               Lottie.asset(
                 'assets/lottie/heart_beat.json',
                 width: 200,
                 height: 200,
                 fit: BoxFit.fill,
-              ),
-              //Image.asset("assets/images/heartbeat.png", color: Colors.white,height: 100,),
-              Text(
-                "Health Care",
-                style: TextStyles.h1Style.white,
-              ),
-              Text(
-                "By Gokul HealthCare Team",
-                style: TextStyles.bodySm.white.bold,
               ),
               Expanded(
                 flex: 7,

@@ -2,16 +2,16 @@ import 'package:flutter/material.dart';
 
 class AppThemes {
   static final lightTheme = ThemeData(
-    primarySwatch: Colors.purple,
+    primarySwatch: Colors.deepPurple,
     brightness: Brightness.light,
     appBarTheme: AppBarTheme(
-      backgroundColor: Colors.purple,
+      backgroundColor: Colors.deepPurple,
       foregroundColor: Colors.white,
     ),
     textTheme: TextTheme(
       titleMedium: TextStyle(color: Colors.black), // replaces bodyText1
       bodyMedium: TextStyle(color: Colors.black87), // replaces bodyText2
-      headlineMedium: TextStyle(fontSize: 20.0, fontWeight: FontWeight.bold, color: Colors.purple), // new for headline6
+      headlineMedium: TextStyle(fontSize: 20.0, fontWeight: FontWeight.bold, color: Colors.deepPurple), // new for headline6
     ),
   );
 

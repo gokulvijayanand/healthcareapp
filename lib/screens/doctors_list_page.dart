@@ -50,7 +50,12 @@ class _DoctorsListPageState extends State<DoctorsListPage> {
           final doctor = _doctors[index];
           return Card(
             child: ListTile(
-              leading: Image.asset(doctor.image, width: 50, height: 50, fit: BoxFit.cover),
+              leading: CircleAvatar(
+              backgroundColor: Colors.deepPurple,
+              radius: 25,
+              backgroundImage: AssetImage(doctor.image),
+              ),
+              //Image.asset(doctor.image, width: 50, height: 50, fit: BoxFit.cover),
               title: Text(doctor.name),
               subtitle: Text('${doctor.specialization}, ${doctor.qualification}'),
               onTap: () => Navigator.push(
