@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:lottie/lottie.dart';
 import 'home_page.dart';
 import 'package:myflutterproject/theams/light_color.dart';
 import 'package:myflutterproject/theams/text_styles.dart';
@@ -55,13 +56,19 @@ class _SplashScreenState extends State<SplashScreen> {
                 flex: 2,
                 child: SizedBox(),
               ),
-              Image.asset("assets/images/heartbeat.png", color: Colors.white,height: 100,),
+              Lottie.asset(
+                'assets/lottie/heart_beat.json',
+                width: 200,
+                height: 200,
+                fit: BoxFit.fill,
+              ),
+              //Image.asset("assets/images/heartbeat.png", color: Colors.white,height: 100,),
               Text(
-                "Time Health",
+                "Health Care",
                 style: TextStyles.h1Style.white,
               ),
               Text(
-                "By healthcare Evolution",
+                "By Gokul HealthCare Team",
                 style: TextStyles.bodySm.white.bold,
               ),
               Expanded(
