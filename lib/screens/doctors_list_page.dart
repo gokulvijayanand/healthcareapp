@@ -136,5 +136,6 @@ class _DoctorsListPageState extends State<DoctorsListPage> {
         ],
       ),
     );
+
   }
 }
