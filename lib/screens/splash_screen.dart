@@ -21,71 +21,49 @@ class _SplashScreenState extends State<SplashScreen> {
     });
     super.initState();
   }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       body: Stack(
         children: <Widget>[
-          // Container(
-          //   decoration: BoxDecoration(
-          //     image: DecorationImage(
-          //       image: AssetImage("assets/images/doctor_sp.jpg"),
-          //       fit: BoxFit.fill,
-          //     ),
-          //   ),
-          // ),
-          Positioned.fill(
-            child: Opacity(
-              opacity: .6,
-              child: Container(
-                decoration: BoxDecoration(
-                  gradient: LinearGradient(
-                      colors: [LightColor.purple, LightColor.purple],
-                      begin: Alignment.topCenter,
-                      end: Alignment.bottomCenter,
-                      tileMode: TileMode.mirror,
-                      stops: [.5, 6]),
-                ),
+          Container(
+            decoration: BoxDecoration(
+              gradient: LinearGradient(
+                colors: [
+                  LightColor.purpleLight,
+                  LightColor.purple,
+                ],
+                begin: Alignment.topCenter,
+                end: Alignment.bottomCenter,
               ),
             ),
           ),
-          Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            crossAxisAlignment: CrossAxisAlignment.center,
-            children: <Widget>[
-              Expanded(
-                flex: 2,
-                child: SizedBox(),
-              ),
-              SizedBox(height: 275),
-              //Image.asset("assets/images/heartbeat.png", color: Colors.white,height: 100,),
-              Card(
-                shape: RoundedRectangleBorder( // This rounds the corners of the Card
-                borderRadius: BorderRadius.circular(20.0),
-                ),
-                color: Colors.deepPurple,
-
-                child: Text(
+          Center(
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              crossAxisAlignment: CrossAxisAlignment.center,
+              children: <Widget>[
+                SizedBox(height: 100),
+                Text(
                   "Health Care",
-                  style: TextStyle(color: Colors.white,fontSize: 30,fontWeight: FontWeight.w700 )
+                  style: TextStyle(color: Colors.white, fontSize: 40, fontWeight: FontWeight.bold),
                 ),
-              ),
-              Text(
-                "By Gokul HealthCare Team",
-                style: TextStyle(color: Colors.deepPurple,fontSize: 30,fontWeight: FontWeight.normal ),
-              ),
-              Lottie.asset(
-                'assets/lottie/heart_beat.json',
-                width: 200,
-                height: 200,
-                fit: BoxFit.fill,
-              ),
-              Expanded(
-                flex: 7,
-                child: SizedBox(),
-              ),
-            ],
-          ).alignTopCenter,
+                SizedBox(height: 20),
+                Text(
+                  "By Gokul HealthCare Team",
+                  style: TextStyle(color: Colors.white, fontSize: 20, fontWeight: FontWeight.normal),
+                ),
+                SizedBox(height: 20),
+                Lottie.asset(
+                  'assets/lottie/heart_beat.json',
+                  width: 200,
+                  height: 200,
+                  fit: BoxFit.fill,
+                ),
+              ],
+            ),
+          ),
         ],
       ),
     );

@@ -3,6 +3,7 @@ class Doctor {
   final String name;
   final String qualification;
   final String specialization;
+  final String specialization_icon;
   final String image;
   final String mailid;
   final String officeNo;
@@ -12,6 +13,7 @@ class Doctor {
     required this.name,
     required this.qualification,
     required this.specialization,
+    required this.specialization_icon,
     required this.image,
     required this.mailid,
     required this.officeNo,
@@ -23,6 +25,7 @@ class Doctor {
       name: json['name'],
       qualification: json['qualification'],
       specialization: json['specialization'],
+      specialization_icon:json['specialization_icon'],
       image: json['image'],
       mailid: json['mailid'],
       officeNo: json['officeNo'],
