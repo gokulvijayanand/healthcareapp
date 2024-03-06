@@ -11,6 +11,7 @@ class SpecializationListPage extends StatefulWidget {
 
 class _SpecializationListPageState extends State<SpecializationListPage> {
   List<String> _specializations = [];
+  String? _hoveredSpecialization;
 
   @override
   void initState() {
@@ -39,23 +40,59 @@ class _SpecializationListPageState extends State<SpecializationListPage> {
       appBar: AppBar(
         title: Text('Select Specialization'),
       ),
-      body: ListView.builder(
-        itemCount: _specializations.length,
-        itemBuilder: (context, index) {
-          return Card(
-            child: ListTile(
-              title: Text(_specializations[index]),
-              onTap: () {
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                    builder: (context) => DoctorsListPage(specialization: _specializations[index]),
+      body: SingleChildScrollView(
+        physics: ScrollPhysics(), // Enables scrolling
+        padding: EdgeInsets.all(20.0), // Adds space around the GridView
+        child: GridView.count(
+          shrinkWrap: true, // wrap content tightly
+          crossAxisCount: 2,
+          children: _specializations.map((specialization) {
+            return Padding(
+              padding: EdgeInsets.all(1.0), // Adds space between the cards
+              child: MouseRegion(
+                onEnter: (event) {
+                  setState(() {
+                    // Change color on hover
+                    _hoveredSpecialization = specialization;
+                  });
+                },
+
+                onExit: (event) {
+                  setState(() {
+                    _hoveredSpecialization = Colors.white as String?;
+                  });
+                },
+                child: Card(
+                  elevation: 4, // Add elevation for shadow effect
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(15), // Rounded corners
                   ),
-                );
-              },
-            ),
-          );
-        },
+                  color: _hoveredSpecialization == specialization
+                      ? Colors.purple.withOpacity(0.8) // Lighter purple on hover
+                      : Colors.purple, // Default purple color
+                  child: ListTile(
+                    leading: Icon(Icons.medical_services, color: Colors.white), // Icon
+                    title: Center(
+                      child: Text(
+                        specialization,
+                        style: TextStyle(color: Colors.white), // White text color
+                      ),
+                    ),
+                    onTap: () {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) =>
+                              DoctorsListPage(specialization: specialization),
+                        ),
+                      );
+                    },
+                  ),
+                ),
+              ),
+            );
+          }).toList(),
+        ),
       ),
     );
   }

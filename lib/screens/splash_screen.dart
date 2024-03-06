@@ -26,21 +26,21 @@ class _SplashScreenState extends State<SplashScreen> {
     return Scaffold(
       body: Stack(
         children: <Widget>[
-          Container(
-            decoration: BoxDecoration(
-              image: DecorationImage(
-                image: AssetImage("assets/images/doctor_sp.jpg"),
-                fit: BoxFit.fill,
-              ),
-            ),
-          ),
+          // Container(
+          //   decoration: BoxDecoration(
+          //     image: DecorationImage(
+          //       image: AssetImage("assets/images/doctor_sp.jpg"),
+          //       fit: BoxFit.fill,
+          //     ),
+          //   ),
+          // ),
           Positioned.fill(
             child: Opacity(
               opacity: .6,
               child: Container(
                 decoration: BoxDecoration(
                   gradient: LinearGradient(
-                      colors: [LightColor.purpleExtraLight, LightColor.purple],
+                      colors: [LightColor.purple, LightColor.purple],
                       begin: Alignment.topCenter,
                       end: Alignment.bottomCenter,
                       tileMode: TileMode.mirror,
@@ -61,7 +61,7 @@ class _SplashScreenState extends State<SplashScreen> {
               //Image.asset("assets/images/heartbeat.png", color: Colors.white,height: 100,),
               Card(
                 shape: RoundedRectangleBorder( // This rounds the corners of the Card
-                borderRadius: BorderRadius.circular(12.0),
+                borderRadius: BorderRadius.circular(20.0),
                 ),
                 color: Colors.deepPurple,
 
