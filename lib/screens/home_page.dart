@@ -6,8 +6,27 @@ import 'appointment_booking_page.dart';
 import 'specialization_list_page.dart';
 import 'login_page.dart';
 
-class HomePage extends StatelessWidget {
-  const HomePage({key}) : super(key: key);
+class HomePage extends StatefulWidget {
+  const HomePage({Key? key}) : super(key: key);
+
+  @override
+  _HomePageState createState() => _HomePageState();
+}
+
+class _HomePageState extends State<HomePage> {
+  int _selectedIndex = 0;
+
+  static List<Widget> _widgetOptions = <Widget>[
+    DoctorsListPage(),
+    AppointmentBookingPage(),
+    SpecializationListPage(),
+  ];
+
+  void _onItemTapped(int index) {
+    setState(() {
+      _selectedIndex = index;
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -28,38 +47,26 @@ class HomePage extends StatelessWidget {
           ),
         ],
       ),
-      body: Column(
-        children: [
-          SizedBox(height: 20),
-          Row(
-            children: [
-              Expanded(
-                child: HomeCard(
-                  title: 'Doctor',
-                  lottiePath: 'assets/lottie/doctor.json',
-                  onTap: () {
-                    Navigator.push(
-                      context,
-                      MaterialPageRoute(builder: (context) => DoctorsListPage()),
-                    );
-                  },
-                ),
-              ),
-              Expanded(
-                child: HomeCard(
-                  title: 'Appointment',
-                  lottiePath: 'assets/lottie/appointment.json',
-                  onTap: () {
-                    Navigator.push(
-                      context,
-                      MaterialPageRoute(builder: (context) => SpecializationListPage()),
-                    );
-                  },
-                ),
-              ),
-            ],
+      body: Center(
+        child: _widgetOptions.elementAt(_selectedIndex),
+      ),
+      bottomNavigationBar: BottomNavigationBar(
+        items: const <BottomNavigationBarItem>[
+          BottomNavigationBarItem(
+            icon: Icon(Icons.people),
+            label: 'Doctors',
+          ),
+          BottomNavigationBarItem(
+            icon: Icon(Icons.calendar_month),
+            label: 'Appointment',
+          ),
+          BottomNavigationBarItem(
+            icon: Icon(Icons.list),
+            label: 'Specializations',
           ),
         ],
+        currentIndex: _selectedIndex,
+        onTap: _onItemTapped,
       ),
     );
   }
