@@ -17,6 +17,7 @@ class _HomePageState extends State<HomePage> {
   int _selectedIndex = 0;
 
   static List<Widget> _widgetOptions = <Widget>[
+    WelcomePage(), // Welcome page added
     DoctorsListPage(),
     AppointmentBookingPage(),
     SpecializationListPage(),
@@ -37,8 +38,7 @@ class _HomePageState extends State<HomePage> {
           IconButton(
             icon: Icon(Icons.login),
             onPressed: () {
-              // Add your logic here to open the login page
-              // For demonstration, let's navigate to a hypothetical LoginPage
+              // Navigating to the login page
               Navigator.push(
                 context,
                 MaterialPageRoute(builder: (context) => loginScreen()),
@@ -51,23 +51,54 @@ class _HomePageState extends State<HomePage> {
         child: _widgetOptions.elementAt(_selectedIndex),
       ),
       bottomNavigationBar: BottomNavigationBar(
+        backgroundColor: Colors.amber,
+        // Setting background color to purple
         items: const <BottomNavigationBarItem>[
           BottomNavigationBarItem(
-            icon: Icon(Icons.people),
+            icon: Icon(Icons.home,color: Colors.deepPurple),
+            label: 'Home',
+          ),
+          BottomNavigationBarItem(
+            icon: Icon(Icons.people,color: Colors.deepPurple),
             label: 'Doctors',
           ),
           BottomNavigationBarItem(
-            icon: Icon(Icons.calendar_month),
+            icon: Icon(Icons.calendar_month,color: Colors.deepPurple),
             label: 'Appointment',
           ),
           BottomNavigationBarItem(
-            icon: Icon(Icons.list),
+            icon: Icon(Icons.list,color: Colors.deepPurple),
             label: 'Specializations',
           ),
-
         ],
         currentIndex: _selectedIndex,
         onTap: _onItemTapped,
+      ),
+    );
+  }
+}
+
+// WelcomePage widget added
+class WelcomePage extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      backgroundColor: Colors.white, // Setting background color to purple
+      body: Center(
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            Text(
+              'Welcome to Home Page',
+              style: TextStyle(fontSize: 20.0, color: Colors.purple),
+            ),
+            SizedBox(height: 20),
+            Text(
+              'Tap on the bottom navigation icons to navigate.',
+              style: TextStyle(fontSize: 16.0, color: Colors.purple),
+            ),
+          ],
+        ),
       ),
     );
   }
