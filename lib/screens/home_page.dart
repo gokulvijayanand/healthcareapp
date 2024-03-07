@@ -64,6 +64,7 @@ class _HomePageState extends State<HomePage> {
             icon: Icon(Icons.list),
             label: 'Specializations',
           ),
+
         ],
         currentIndex: _selectedIndex,
         onTap: _onItemTapped,

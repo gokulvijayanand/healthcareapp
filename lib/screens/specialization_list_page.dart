@@ -121,5 +121,5 @@ Widget _buildLottieAsset(String specialization) {
   // Add more conditions as needed
 
   // Return Lottie asset widget
-  return Lottie.asset(lottieAsset, width: 50);
+  return Lottie.asset(lottieAsset, width: 60);
 }

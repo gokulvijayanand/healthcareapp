@@ -2,7 +2,6 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'sign_up_screen.dart';
 
-
 class loginScreen extends StatefulWidget {
   @override
   State<loginScreen> createState() => _loginScreenState();
@@ -10,6 +9,17 @@ class loginScreen extends StatefulWidget {
 
 class _loginScreenState extends State<loginScreen> {
   bool passToggle = true;
+
+  // Function to handle login with Gmail
+  void _loginWithGmail() {
+    // Implement your Gmail login logic here
+  }
+
+  // Function to handle login with Facebook
+  void _loginWithFacebook() {
+    // Implement your Facebook login logic here
+  }
+
   @override
   Widget build(BuildContext context) {
     return Material(
@@ -31,7 +41,7 @@ class _loginScreenState extends State<loginScreen> {
                 child: TextField(
                   decoration: InputDecoration(
                     border: OutlineInputBorder(),
-                    label: Text("Enter Username"),
+                    labelText: "Enter Username",
                     prefixIcon: Icon(Icons.person),
                   ),
                 ),
@@ -39,23 +49,22 @@ class _loginScreenState extends State<loginScreen> {
               Padding(
                 padding: const EdgeInsets.all(12),
                 child: TextField(
-                  obscureText: passToggle ? true : false,
+                  obscureText: passToggle,
                   decoration: InputDecoration(
                     border: OutlineInputBorder(),
-                    label: Text("Enter Password"),
+                    labelText: "Enter Password",
                     prefixIcon: Icon(Icons.lock),
                     suffixIcon: InkWell(
                       onTap: () {
-                        if (passToggle == true) {
-                          passToggle = false;
-                        } else {
-                          passToggle = true;
-                        }
-                        setState(() {});
+                        setState(() {
+                          passToggle = !passToggle;
+                        });
                       },
-                      child: passToggle
-                          ? Icon(CupertinoIcons.eye_slash_fill)
-                          : Icon(CupertinoIcons.eye_fill),
+                      child: Icon(
+                        passToggle
+                            ? CupertinoIcons.eye_slash_fill
+                            : CupertinoIcons.eye_fill,
+                      ),
                     ),
                   ),
                 ),
@@ -65,11 +74,7 @@ class _loginScreenState extends State<loginScreen> {
                 padding: const EdgeInsets.all(15),
                 child: InkWell(
                   onTap: () {
-                    Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                          builder: (context) => SignUpScreen(),
-                        ));
+                    // Handle login logic here
                   },
                   child: Container(
                     padding: EdgeInsets.symmetric(vertical: 15),
@@ -97,6 +102,40 @@ class _loginScreenState extends State<loginScreen> {
                     ),
                   ),
                 ),
+              ),
+              SizedBox(height: 20),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Text(
+                    "Or login with",
+                    style: TextStyle(
+                      fontSize: 16,
+                      fontWeight: FontWeight.w500,
+                      color: Colors.black54,
+                    ),
+                  ),
+                  SizedBox(width: 10),
+                  // Button for logging in with Gmail
+                  ElevatedButton.icon(
+                    onPressed: _loginWithGmail,
+                    icon: Icon(Icons.email),
+                    label: Text("Gmail"),
+                    style: ElevatedButton.styleFrom(
+                      // Gmail color
+                    ),
+                  ),
+                  SizedBox(width: 10),
+                  // Button for logging in with Facebook
+                  ElevatedButton.icon(
+                    onPressed: _loginWithFacebook,
+                    icon: Icon(Icons.facebook),
+                    label: Text("Facebook"),
+                    style: ElevatedButton.styleFrom(
+                      // Facebook color
+                    ),
+                  ),
+                ],
               ),
               SizedBox(height: 20),
               Row(
