@@ -4,51 +4,102 @@ import '../widgets/home_card.dart';
 import 'doctors_list_page.dart';
 import 'appointment_booking_page.dart';
 import 'specialization_list_page.dart';
+import 'login_page.dart';
 
- class HomePage extends StatelessWidget {
-   const HomePage({super.key});
+class HomePage extends StatefulWidget {
+  const HomePage({Key? key}) : super(key: key);
 
-   @override
-   Widget build(BuildContext context) {
-     return Scaffold(
-       appBar: AppBar(
-         title: Text("HOME"),
+  @override
+  _HomePageState createState() => _HomePageState();
+}
 
-       ),
-       body: Column(
-         children: [
-           SizedBox(height: 20),
-           Row(
-             children: [
-               Expanded(
-                 child: HomeCard(
-                   title: 'Doctor',
-                   lottiePath: 'assets/lottie/doctor.json',
-                   onTap: () {
-                     Navigator.push(
-                       context,
-                       MaterialPageRoute(builder: (context) => DoctorsListPage()),
-                     );
-                   },
-                 ),
-               ),
-               Expanded(
-                 child: HomeCard(
-                   title: 'Appointment',
-                   lottiePath: 'assets/lottie/appointment.json',
-                   onTap: () {
-                     Navigator.push(
-                       context,
-                       MaterialPageRoute(builder: (context) => SpecializationListPage()),
-                     );
-                   },
-                 ),
-               ),
-             ],
-           ),
+class _HomePageState extends State<HomePage> {
+  int _selectedIndex = 0;
 
-         ],
-       ),
-     );
-   }
- }
+  static List<Widget> _widgetOptions = <Widget>[
+    WelcomePage(), // Welcome page added
+    DoctorsListPage(),
+    AppointmentBookingPage(),
+    SpecializationListPage(),
+  ];
+
+  void _onItemTapped(int index) {
+    setState(() {
+      _selectedIndex = index;
+    });
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(
+        title: Text("HOME"),
+        actions: [
+          IconButton(
+            icon: Icon(Icons.login),
+            onPressed: () {
+              // Navigating to the login page
+              Navigator.push(
+                context,
+                MaterialPageRoute(builder: (context) => loginScreen()),
+              );
+            },
+          ),
+        ],
+      ),
+      body: Center(
+        child: _widgetOptions.elementAt(_selectedIndex),
+      ),
+      bottomNavigationBar: BottomNavigationBar(
+        backgroundColor: Colors.amber,
+        // Setting background color to purple
+        items: const <BottomNavigationBarItem>[
+          BottomNavigationBarItem(
+            icon: Icon(Icons.home,color: Colors.deepPurple),
+            label: 'Home',
+          ),
+          BottomNavigationBarItem(
+            icon: Icon(Icons.people,color: Colors.deepPurple),
+            label: 'Doctors',
+          ),
+          BottomNavigationBarItem(
+            icon: Icon(Icons.calendar_month,color: Colors.deepPurple),
+            label: 'Appointment',
+          ),
+          BottomNavigationBarItem(
+            icon: Icon(Icons.list,color: Colors.deepPurple),
+            label: 'Specializations',
+          ),
+        ],
+        currentIndex: _selectedIndex,
+        onTap: _onItemTapped,
+      ),
+    );
+  }
+}
+
+// WelcomePage widget added
+class WelcomePage extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      backgroundColor: Colors.white, // Setting background color to purple
+      body: Center(
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            Text(
+              'Welcome to Home Page',
+              style: TextStyle(fontSize: 20.0, color: Colors.purple),
+            ),
+            SizedBox(height: 20),
+            Text(
+              'Tap on the bottom navigation icons to navigate.',
+              style: TextStyle(fontSize: 16.0, color: Colors.purple),
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+}

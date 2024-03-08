@@ -1,6 +1,7 @@
 import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:lottie/lottie.dart'; // Import the lottie package
 import '../models/doctor.dart'; // Ensure this import is correct
 import 'doctors_list_page.dart'; // Ensure this import is correct
 
@@ -56,10 +57,9 @@ class _SpecializationListPageState extends State<SpecializationListPage> {
                     _hoveredSpecialization = specialization;
                   });
                 },
-
                 onExit: (event) {
                   setState(() {
-                    _hoveredSpecialization = Colors.white as String?;
+                    _hoveredSpecialization = null;
                   });
                 },
                 child: Card(
@@ -68,27 +68,37 @@ class _SpecializationListPageState extends State<SpecializationListPage> {
                     borderRadius: BorderRadius.circular(15), // Rounded corners
                   ),
                   color: _hoveredSpecialization == specialization
-                      ? Colors.purple.withOpacity(0.8) // Lighter purple on hover
-                      : Colors.purple, // Default purple color
-                  child: ListTile(
-                    leading: Icon(Icons.medical_services, color: Colors.white), // Icon
-                    title: Center(
-                      child: Text(
-                        specialization,
-                        style: TextStyle(color: Colors.white), // White text color
-                      ),
-                    ),
+                      ? Colors.deepPurple.withOpacity(0.8) // Lighter purple on hover
+                      : Colors.deepPurple, // Default purple color
+                  child: InkWell(
                     onTap: () {
                       Navigator.push(
                         context,
                         MaterialPageRoute(
-                          builder: (context) =>
-                              DoctorsListPage(specialization: specialization),
+                          builder: (context) => DoctorsListPage(specialization: specialization),
                         ),
                       );
                     },
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        Center(
+                          child: Padding(
+                            padding: const EdgeInsets.symmetric(vertical: 8.0),
+                            child: _buildLottieAsset(specialization), // Lottie asset
+                          ),
+                        ),
+                        Center(
+                          child: Text(
+                            specialization,
+                            style: TextStyle(color: Colors.white), // White text color
+                          ),
+                        ),
+                      ],
+                    ),
                   ),
                 ),
+
               ),
             );
           }).toList(),
@@ -96,4 +106,20 @@ class _SpecializationListPageState extends State<SpecializationListPage> {
       ),
     );
   }
+}
+
+Widget _buildLottieAsset(String specialization) {
+  // Default Lottie asset if specialization doesn't match any condition
+  String lottieAsset = 'assets/lottie/heart_beat.json';
+
+  // Check specialization value and assign appropriate Lottie asset
+  if (specialization == 'Dermatologist') {
+    lottieAsset = 'assets/lottie/doctor.json';
+  } else if (specialization == 'Dentist') {
+    lottieAsset = 'assets/lottie/appointment.json';
+  }
+  // Add more conditions as needed
+
+  // Return Lottie asset widget
+  return Lottie.asset(lottieAsset, width: 60);
 }

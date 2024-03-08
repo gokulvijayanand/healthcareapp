@@ -4,6 +4,7 @@
     "name": "Dr. John Doe",
     "qualification": "MBBS, MD",
     "specialization": "Cardiologist",
+    "specialization_icon": "assets/lottie/heart_beat.json",
     "image": "assets/images/doctor_1.png",
     "mailid": "johndoe@example.com",
     "officeNo": "123-456-7890"
@@ -13,6 +14,7 @@
     "name": "Dr. Jane Smith",
     "qualification": "MBBS, MS",
     "specialization": "Neurologist",
+    "specialization_icon": "assets/lottie/heart_beat.json",
     "image": "assets/images/doctor_3.png",
     "mailid": "janesmith@example.com",
     "officeNo": "098-765-4321"
@@ -22,6 +24,7 @@
     "name": "Dr. Emily White",
     "qualification": "MD, PhD",
     "specialization": "Pediatrician",
+    "specialization_icon": "assets/lottie/heart_beat.json",
     "image": "assets/images/doctor_4.png",
     "mailid": "emilywhite@example.com",
     "officeNo": "234-567-8901"
@@ -31,6 +34,7 @@
     "name": "Dr. Chris Green",
     "qualification": "BDS, MDS",
     "specialization": "Dentist",
+    "specialization_icon": "assets/lottie/heart_beat.json",
     "image": "assets/images/doctor_3.png",
     "mailid": "chrisgreen@example.com",
     "officeNo": "345-678-9012"
@@ -40,6 +44,7 @@
     "name": "Dr. Olivia Brown",
     "qualification": "MBBS, DM",
     "specialization": "Dermatologist",
+    "specialization_icon": "assets/lottie/heart_beat.json",
     "image": "assets/images/doctor_4.png",
     "mailid": "oliviabrown@example.com",
     "officeNo": "456-789-0123"
@@ -49,6 +54,7 @@
     "name": "Dr. Ethan Johnson",
     "qualification": "MBBS, MD",
     "specialization": "General Surgeon",
+    "specialization_icon": "assets/lottie/heart_beat.json",
     "image": "assets/images/doctor_1.png",
     "mailid": "ethanjohnson@example.com",
     "officeNo": "567-890-1234"
@@ -58,6 +64,7 @@
     "name": "Dr. Sophia Lee",
     "qualification": "MBBS, MD",
     "specialization": "Gynecologist",
+    "specialization_icon": "assets/lottie/heart_beat.json",
     "image": "assets/images/doctor_3.png",
     "mailid": "sophialee@example.com",
     "officeNo": "678-901-2345"
@@ -67,6 +74,7 @@
     "name": "Dr. Daniel Miller",
     "qualification": "MBBS, MD",
     "specialization": "Ophthalmologist",
+    "specialization_icon": "assets/lottie/heart_beat.json",
     "image": "assets/images/doctor_4.png",
     "mailid": "danielmiller@example.com",
     "officeNo": "789-012-3456"
@@ -76,6 +84,7 @@
     "name": "Dr. Ava Wilson",
     "qualification": "MBBS, MD",
     "specialization": "Orthopedic",
+    "specialization_icon": "assets/lottie/heart_beat.json",
     "image": "assets/images/doctor_1.png",
     "mailid": "avawilson@example.com",
     "officeNo": "890-123-4567"
@@ -85,6 +94,7 @@
     "name": "Dr. Matthew Moore",
     "qualification": "MBBS, MD",
     "specialization": "ENT Specialist",
+    "specialization_icon": "assets/lottie/heart_beat.json",
     "image": "assets/images/doctor_3.png",
     "mailid": "matthewmoore@example.com",
     "officeNo": "901-234-5678"
@@ -94,6 +104,7 @@
     "name": "Dr. Vijayanand",
     "qualification": "MBBS, DM",
     "specialization": "Dermatologist",
+    "specialization_icon": "assets/lottie/heart_beat.json",
     "image": "assets/images/doctor_4.png",
     "mailid": "oliviabrown@example.com",
     "officeNo": "456-789-0123"
@@ -103,6 +114,7 @@
     "name": "Dr. Ethan Johnson",
     "qualification": "MBBS, MD",
     "specialization": "General Surgeon",
+    "specialization_icon": "assets/lottie/heart_beat.json",
     "image": "assets/images/doctor_1.png",
     "mailid": "ethanjohnson@example.com",
     "officeNo": "567-890-1234"
@@ -112,6 +124,7 @@
     "name": "Dr. Sophia Lee",
     "qualification": "MBBS, MD",
     "specialization": "Gynecologist",
+    "specialization_icon": "assets/lottie/heart_beat.json",
     "image": "assets/images/doctor_3.png",
     "mailid": "sophialee@example.com",
     "officeNo": "678-901-2345"
@@ -121,6 +134,7 @@
     "name": "Dr. Daniel Miller",
     "qualification": "MBBS, MD",
     "specialization": "Ophthalmologist",
+    "specialization_icon": "assets/lottie/heart_beat.json",
     "image": "assets/images/doctor_4.png",
     "mailid": "danielmiller@example.com",
     "officeNo": "789-012-3456"
@@ -130,6 +144,7 @@
     "name": "Dr. Ava Wilson",
     "qualification": "MBBS, MD",
     "specialization": "Orthopedic",
+    "specialization_icon": "assets/lottie/heart_beat.json",
     "image": "assets/images/doctor_1.png",
     "mailid": "avawilson@example.com",
     "officeNo": "890-123-4567"
@@ -139,6 +154,7 @@
     "name": "Dr. Matthew Moore",
     "qualification": "MBBS, MD",
     "specialization": "ENT Specialist",
+    "specialization_icon": "assets/lottie/heart_beat.json",
     "image": "assets/images/doctor_3.png",
     "mailid": "matthewmoore@example.com",
     "officeNo": "901-234-5678"
