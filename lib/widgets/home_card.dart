@@ -35,7 +35,7 @@ class HomeCard extends StatelessWidget {
                 fit: BoxFit.fill,
               ),
               SizedBox(width: 10),
-              Text(title, style: TextStyle(fontSize: 15, color: Colors.white, fontWeight: FontWeight.bold)),
+              Text(title, style: TextStyle(fontSize: 15, color: Colors.deepPurpleAccent, fontWeight: FontWeight.bold)),
             ],
           ),
         ),

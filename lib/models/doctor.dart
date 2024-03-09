@@ -21,14 +21,16 @@ class Doctor {
 
   factory Doctor.fromJson(Map<String, dynamic> json) {
     return Doctor(
-      id:json['id'],
+      id: json['id'],
       name: json['name'],
       qualification: json['qualification'],
       specialization: json['specialization'],
-      specialization_icon:json['specialization_icon'],
+      specialization_icon: json['specialization_icon'],
       image: json['image'],
       mailid: json['mailid'],
       officeNo: json['officeNo'],
     );
   }
+
+  String get imageUrl => image; // Corrected getter method
 }

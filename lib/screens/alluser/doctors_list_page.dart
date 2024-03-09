@@ -1,7 +1,7 @@
 import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import '../models/doctor.dart';
+import '../../models/doctor.dart';
 import 'doctor_detail_page.dart'; // Ensure this import path is correct
 
 class DoctorsListPage extends StatefulWidget {

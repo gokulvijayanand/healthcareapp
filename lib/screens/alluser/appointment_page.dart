@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:table_calendar/table_calendar.dart'; // Import TableCalendar
-import '../models/doctor.dart'; // Import your Doctor model
+import '../../models/doctor.dart'; // Import your Doctor model
 import 'dart:convert';
 
 class AppointmentPage extends StatefulWidget {

@@ -1,7 +1,8 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:lottie/lottie.dart';
-import 'home_page.dart';
+import 'package:myflutterproject/screens/alluser//loginpage.dart';
+import 'alluser/home_page.dart';
 import 'package:myflutterproject/theams/light_color.dart';
 import 'package:myflutterproject/theams/text_styles.dart';
 import 'package:myflutterproject/theams/extention.dart';

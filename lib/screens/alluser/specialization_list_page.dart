@@ -2,7 +2,7 @@ import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:lottie/lottie.dart'; // Import the lottie package
-import '../models/doctor.dart'; // Ensure this import is correct
+import '../../models/doctor.dart'; // Ensure this import is correct
 import 'doctors_list_page.dart'; // Ensure this import is correct
 
 class SpecializationListPage extends StatefulWidget {

@@ -1,10 +1,13 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import '../widgets/home_card.dart';
+import '../../widgets/home_card.dart';
 import 'doctors_list_page.dart';
 import 'appointment_booking_page.dart';
 import 'specialization_list_page.dart';
 import 'login_page.dart';
+import '../../models/doctor.dart';
+import 'doctor_detail_page.dart';
+
 
 class HomePage extends StatefulWidget {
   const HomePage({Key? key}) : super(key: key);
@@ -41,7 +44,7 @@ class _HomePageState extends State<HomePage> {
               // Navigating to the login page
               Navigator.push(
                 context,
-                MaterialPageRoute(builder: (context) => loginScreen()),
+                MaterialPageRoute(builder: (context) => LoginPage()),
               );
             },
           ),
@@ -72,18 +75,20 @@ class _HomePageState extends State<HomePage> {
           ),
         ],
         currentIndex: _selectedIndex,
+        selectedItemColor: Colors.deepPurple, // Color for selected item (icon and text)
+        unselectedItemColor: Colors.white, // Color for unselected items (icon and text)
         onTap: _onItemTapped,
+
       ),
     );
   }
 }
 
-// WelcomePage widget added
 class WelcomePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.white, // Setting background color to purple
+      backgroundColor: Colors.white,
       body: Center(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
@@ -96,6 +101,58 @@ class WelcomePage extends StatelessWidget {
             Text(
               'Tap on the bottom navigation icons to navigate.',
               style: TextStyle(fontSize: 16.0, color: Colors.purple),
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+}
+class LoginPage extends StatefulWidget {
+  const LoginPage({Key? key}) : super(key: key);
+
+  @override
+  _LoginPageState createState() => _LoginPageState();
+}
+
+class _LoginPageState extends State<LoginPage> {
+  final TextEditingController _emailController = TextEditingController();
+  final TextEditingController _passwordController = TextEditingController();
+
+  void _login() {
+    // Implement your login logic here
+    print("Login with: ${_emailController.text}, ${_passwordController.text}");
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(
+        title: Text("Login"),
+      ),
+      body: Padding(
+        padding: EdgeInsets.all(16.0),
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: <Widget>[
+            TextField(
+              controller: _emailController,
+              decoration: InputDecoration(
+                hintText: 'Email',
+              ),
+            ),
+            SizedBox(height: 8),
+            TextField(
+              controller: _passwordController,
+              obscureText: true,
+              decoration: InputDecoration(
+                hintText: 'Password',
+              ),
+            ),
+            SizedBox(height: 16),
+            ElevatedButton(
+              onPressed: _login,
+              child: Text('Login'),
             ),
           ],
         ),

@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import '../models/doctor.dart';
-import 'appointment_page.dart'; // Make sure the path to Doctor model is correct
+import '../../models/doctor.dart'; // Ensure this path is correct.
+import 'appointment_page.dart'; // Update the path according to your project structure.
 
 class DoctorDetailPage extends StatelessWidget {
   final Doctor doctor;
@@ -25,7 +25,7 @@ class DoctorDetailPage extends StatelessWidget {
                   Text('Name: ${doctor.name}', style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold)),
                   Text('Specialization: ${doctor.specialization}', style: TextStyle(fontSize: 20)),
                   Text('Qualification: ${doctor.qualification}', style: TextStyle(fontSize: 18)),
-                  Text('Email: ${doctor.mailid}', style: TextStyle(fontSize: 16)),
+                  Text('Email: ${doctor.mailid}', style: TextStyle(fontSize: 16)), // Assuming it's `email` not `mailid`
                   Text('Office No: ${doctor.officeNo}', style: TextStyle(fontSize: 16)),
                   Text('ID: ${doctor.id}', style: TextStyle(fontSize: 16)),
                   ElevatedButton(
