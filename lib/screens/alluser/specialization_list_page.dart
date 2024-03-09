@@ -116,7 +116,7 @@ Widget _buildLottieAsset(String specialization) {
   if (specialization == 'Dermatologist') {
     lottieAsset = 'assets/lottie/doctor.json';
   } else if (specialization == 'Dentist') {
-    lottieAsset = 'assets/lottie/appointment.json';
+    lottieAsset = 'assets/lottie/appointments.json';
   }
   // Add more conditions as needed
 

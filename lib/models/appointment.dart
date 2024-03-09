@@ -4,7 +4,9 @@ class Appointment {
   final String timeSlot;
   final String slot;
   final String patientName;
+  final int patientAge; // New patientAge field as int
   final String reason;
+  final String status;
 
   Appointment({
     required this.doctorId,
@@ -12,7 +14,9 @@ class Appointment {
     required this.timeSlot,
     required this.slot,
     required this.patientName,
+    required this.patientAge, // Initialize the patientAge
     required this.reason,
+    required this.status,
   });
 
   factory Appointment.fromJson(Map<String, dynamic> json) {
@@ -22,7 +26,9 @@ class Appointment {
       timeSlot: json['timeSlot'],
       slot: json['slot'],
       patientName: json['patientName'],
+      patientAge: json['patientAge'], // Parse the patientAge from JSON
       reason: json['reason'],
+      status: json['status'],
     );
   }
 }

@@ -7,6 +7,7 @@ import 'specialization_list_page.dart';
 import 'login_page.dart';
 import '../../models/doctor.dart';
 import 'doctor_detail_page.dart';
+import '../doctor/doctor_page.dart';
 
 
 class HomePage extends StatefulWidget {
@@ -151,12 +152,20 @@ class _LoginPageState extends State<LoginPage> {
             ),
             SizedBox(height: 16),
             ElevatedButton(
-              onPressed: _login,
+              onPressed: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: (context) => DoctorHomePage()), // Assuming DoctorHomePage is your class name
+                );
+              },
               child: Text('Login'),
             ),
+
           ],
         ),
       ),
     );
   }
 }
+
+
