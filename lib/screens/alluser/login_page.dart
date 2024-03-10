@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/cupertino.dart';
-import '../admin/admin_home.dart';
-import '../doctor/doctor_page.dart'; // Ensure this path is correct
-import 'sign_up_screen.dart'; // Ensure this path is correct
+import "../doctor/doctor_home_page.dart";
+// import '../admin/admin_home.dart';
+
+// import 'sign_up_screen.dart'; // Ensure this path is correct
 
 class LoginPage extends StatefulWidget {
   const LoginPage({Key? key}) : super(key: key);
@@ -27,7 +27,7 @@ class _LoginPageState extends State<LoginPage> {
     else if (_emailController.text == 'admin' && _passwordController.text == 'gokul') {
       Navigator.pushReplacement( // Use pushReplacement to prevent going back to the login page
         context,
-        MaterialPageRoute(builder: (context) => AdminUser()),
+        MaterialPageRoute(builder: (context) => LoginPage()),
       );
     } else {
       // Show an error message if credentials don't match

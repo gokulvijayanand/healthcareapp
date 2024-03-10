@@ -7,7 +7,7 @@ import 'specialization_list_page.dart';
 import 'login_page.dart';
 import '../../models/doctor.dart';
 import 'doctor_detail_page.dart';
-import '../doctor/doctor_page.dart';
+import '../doctor/doctor_home_page';
 
 
 class HomePage extends StatefulWidget {
