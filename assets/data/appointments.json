@@ -6,7 +6,9 @@
     "slot": "1",
     "patientName": "Alice Johnson",
     "patientAge": 29,
-    "reason": "Routine Check-up",
+    "address": "123 Main St",
+    "mobileNumber": "555-123-4567",
+    "reason": "Regular checkup",
     "status": "active"
   },
   {
@@ -16,6 +18,8 @@
     "slot": "2",
     "patientName": "Bob Smith",
     "patientAge": 34,
+    "address": "123 Main St",
+    "mobileNumber": "555-123-4567",
     "reason": "Consultation",
     "status": "inactive"
   },
@@ -26,6 +30,8 @@
     "slot": "3",
     "patientName": "Charlie Davis",
     "patientAge": 47,
+    "address": "123 Main St",
+    "mobileNumber": "555-123-4567",
     "reason": "Follow-up",
     "status": "active"
   },
@@ -36,6 +42,8 @@
     "slot": "4",
     "patientName": "Diana Allen",
     "patientAge": 52,
+    "address": "123 Main St",
+    "mobileNumber": "555-123-4567",
     "reason": "New Symptoms",
     "status": "active"
   }

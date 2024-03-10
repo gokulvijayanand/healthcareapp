@@ -1,175 +1,89 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'sign_up_screen.dart';
+import 'package:flutter/cupertino.dart';
+import '../admin/admin_home.dart';
+import '../doctor/doctor_page.dart'; // Ensure this path is correct
+import 'sign_up_screen.dart'; // Ensure this path is correct
 
-class loginScreen extends StatefulWidget {
+class LoginPage extends StatefulWidget {
+  const LoginPage({Key? key}) : super(key: key);
+
   @override
-  State<loginScreen> createState() => _loginScreenState();
+  _LoginPageState createState() => _LoginPageState();
 }
 
-class _loginScreenState extends State<loginScreen> {
-  bool passToggle = true;
+class _LoginPageState extends State<LoginPage> {
+  final TextEditingController _emailController = TextEditingController();
+  final TextEditingController _passwordController = TextEditingController();
 
-  // Function to handle login with Gmail
-  void _loginWithGmail() {
-    // Implement your Gmail login logic here
+  void _login() {
+    // Username and password for Doctor
+    if (_emailController.text == 'dr doctor' && _passwordController.text == 'doctor') {
+      Navigator.pushReplacement( // Use pushReplacement to prevent going back to the login page
+        context,
+        MaterialPageRoute(builder: (context) => DoctorHomePage()),
+      );
+    }
+    // Username and password for Admin
+    else if (_emailController.text == 'admin' && _passwordController.text == 'gokul') {
+      Navigator.pushReplacement( // Use pushReplacement to prevent going back to the login page
+        context,
+        MaterialPageRoute(builder: (context) => AdminUser()),
+      );
+    } else {
+      // Show an error message if credentials don't match
+      showDialog(
+        context: context,
+        builder: (context) {
+          return AlertDialog(
+            title: Text('Error'),
+            content: Text('Invalid username or password'),
+            actions: <Widget>[
+              TextButton(
+                onPressed: () {
+                  Navigator.of(context).pop(); // Close the dialog
+                },
+                child: Text('OK'),
+              ),
+            ],
+          );
+        },
+      );
+    }
   }
 
-  // Function to handle login with Facebook
-  void _loginWithFacebook() {
-    // Implement your Facebook login logic here
-  }
+
 
   @override
   Widget build(BuildContext context) {
-    return Material(
-      color: Colors.white,
-      child: SingleChildScrollView(
-        child: SafeArea(
-          child: Column(
-            children: [
-              SizedBox(height: 10),
-              Padding(
-                padding: const EdgeInsets.all(20),
-                child: Image.asset(
-                  "assets/images/doctor.png",
-                ),
+    return Scaffold(
+      appBar: AppBar(
+        title: Text("Login"),
+      ),
+      body: Padding(
+        padding: EdgeInsets.all(16.0),
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: <Widget>[
+            TextField(
+              controller: _emailController,
+              decoration: InputDecoration(
+                hintText: 'username',
               ),
-              SizedBox(height: 10),
-              Padding(
-                padding: const EdgeInsets.all(12),
-                child: TextField(
-                  decoration: InputDecoration(
-                    border: OutlineInputBorder(),
-                    labelText: "Enter Username",
-                    prefixIcon: Icon(Icons.person),
-                  ),
-                ),
+            ),
+            SizedBox(height: 8),
+            TextField(
+              controller: _passwordController,
+              obscureText: true,
+              decoration: InputDecoration(
+                hintText: 'Password',
               ),
-              Padding(
-                padding: const EdgeInsets.all(12),
-                child: TextField(
-                  obscureText: passToggle,
-                  decoration: InputDecoration(
-                    border: OutlineInputBorder(),
-                    labelText: "Enter Password",
-                    prefixIcon: Icon(Icons.lock),
-                    suffixIcon: InkWell(
-                      onTap: () {
-                        setState(() {
-                          passToggle = !passToggle;
-                        });
-                      },
-                      child: Icon(
-                        passToggle
-                            ? CupertinoIcons.eye_slash_fill
-                            : CupertinoIcons.eye_fill,
-                      ),
-                    ),
-                  ),
-                ),
-              ),
-              SizedBox(height: 20),
-              Padding(
-                padding: const EdgeInsets.all(15),
-                child: InkWell(
-                  onTap: () {
-                    // Handle login logic here
-                  },
-                  child: Container(
-                    padding: EdgeInsets.symmetric(vertical: 15),
-                    width: double.infinity,
-                    decoration: BoxDecoration(
-                      color: Color(0xFF7165D6),
-                      borderRadius: BorderRadius.circular(10),
-                      boxShadow: [
-                        BoxShadow(
-                          color: Colors.black12,
-                          blurRadius: 4,
-                          spreadRadius: 2,
-                        ),
-                      ],
-                    ),
-                    child: Center(
-                      child: Text(
-                        "Log In",
-                        style: TextStyle(
-                          fontSize: 23,
-                          fontWeight: FontWeight.bold,
-                          color: Colors.white,
-                        ),
-                      ),
-                    ),
-                  ),
-                ),
-              ),
-              SizedBox(height: 20),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  Text(
-                    "Or login with",
-                    style: TextStyle(
-                      fontSize: 16,
-                      fontWeight: FontWeight.w500,
-                      color: Colors.black54,
-                    ),
-                  ),
-                  SizedBox(width: 10),
-                  // Button for logging in with Gmail
-                  ElevatedButton.icon(
-                    onPressed: _loginWithGmail,
-                    icon: Icon(Icons.email),
-                    label: Text("Gmail"),
-                    style: ElevatedButton.styleFrom(
-                      // Gmail color
-                    ),
-                  ),
-                  SizedBox(width: 10),
-                  // Button for logging in with Facebook
-                  ElevatedButton.icon(
-                    onPressed: _loginWithFacebook,
-                    icon: Icon(Icons.facebook),
-                    label: Text("Facebook"),
-                    style: ElevatedButton.styleFrom(
-                      // Facebook color
-                    ),
-                  ),
-                ],
-              ),
-              SizedBox(height: 20),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  Text(
-                    "Don't have any account?",
-                    style: TextStyle(
-                      fontSize: 16,
-                      fontWeight: FontWeight.w500,
-                      color: Colors.black54,
-                    ),
-                  ),
-                  TextButton(
-                    onPressed: () {
-                      Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                            builder: (context) => SignUpScreen(),
-                          ));
-                    },
-                    child: Text(
-                      "Create Account",
-                      style: TextStyle(
-                        fontSize: 18,
-                        fontWeight: FontWeight.bold,
-                        color: Color(0xFF7165D6),
-                      ),
-                    ),
-                  ),
-                ],
-              ),
-            ],
-          ),
+            ),
+            SizedBox(height: 16),
+            ElevatedButton(
+              onPressed: _login, // Call the _login method here
+              child: Text('Login'),
+            ),
+          ],
         ),
       ),
     );

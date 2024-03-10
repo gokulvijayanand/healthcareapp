@@ -7,7 +7,8 @@
     "specialization_icon": "assets/lottie/heart_beat.json",
     "image": "assets/images/doctor_1.png",
     "mailid": "johndoe@example.com",
-    "officeNo": "123-456-7890"
+    "officeNo": "123-456-7890",
+    "available": true
   },
   {
     "id": "2",
@@ -17,7 +18,8 @@
     "specialization_icon": "assets/lottie/heart_beat.json",
     "image": "assets/images/doctor_3.png",
     "mailid": "janesmith@example.com",
-    "officeNo": "098-765-4321"
+    "officeNo": "098-765-4321",
+    "available": false
   },
   {
     "id": "3",
@@ -27,7 +29,8 @@
     "specialization_icon": "assets/lottie/heart_beat.json",
     "image": "assets/images/doctor_4.png",
     "mailid": "emilywhite@example.com",
-    "officeNo": "234-567-8901"
+    "officeNo": "234-567-8901",
+    "available": true
   },
   {
     "id": "4",
@@ -37,7 +40,8 @@
     "specialization_icon": "assets/lottie/heart_beat.json",
     "image": "assets/images/doctor_3.png",
     "mailid": "chrisgreen@example.com",
-    "officeNo": "345-678-9012"
+    "officeNo": "345-678-9012",
+    "available": false
   },
   {
     "id": "5",
@@ -47,7 +51,8 @@
     "specialization_icon": "assets/lottie/heart_beat.json",
     "image": "assets/images/doctor_4.png",
     "mailid": "oliviabrown@example.com",
-    "officeNo": "456-789-0123"
+    "officeNo": "456-789-0123",
+    "available": true
   },
   {
     "id": "6",
@@ -57,7 +62,8 @@
     "specialization_icon": "assets/lottie/heart_beat.json",
     "image": "assets/images/doctor_1.png",
     "mailid": "ethanjohnson@example.com",
-    "officeNo": "567-890-1234"
+    "officeNo": "567-890-1234",
+    "available": false
   },
   {
     "id": "7",
@@ -67,7 +73,8 @@
     "specialization_icon": "assets/lottie/heart_beat.json",
     "image": "assets/images/doctor_3.png",
     "mailid": "sophialee@example.com",
-    "officeNo": "678-901-2345"
+    "officeNo": "678-901-2345",
+    "available": true
   },
   {
     "id": "8",
@@ -77,7 +84,8 @@
     "specialization_icon": "assets/lottie/heart_beat.json",
     "image": "assets/images/doctor_4.png",
     "mailid": "danielmiller@example.com",
-    "officeNo": "789-012-3456"
+    "officeNo": "789-012-3456",
+    "available": false
   },
   {
     "id": "9",
@@ -87,7 +95,8 @@
     "specialization_icon": "assets/lottie/heart_beat.json",
     "image": "assets/images/doctor_1.png",
     "mailid": "avawilson@example.com",
-    "officeNo": "890-123-4567"
+    "officeNo": "890-123-4567",
+    "available": true
   },
   {
     "id": "10",
@@ -97,66 +106,7 @@
     "specialization_icon": "assets/lottie/heart_beat.json",
     "image": "assets/images/doctor_3.png",
     "mailid": "matthewmoore@example.com",
-    "officeNo": "901-234-5678"
-  },
-  {
-    "id": "11",
-    "name": "Dr. Vijayanand",
-    "qualification": "MBBS, DM",
-    "specialization": "Dermatologist",
-    "specialization_icon": "assets/lottie/heart_beat.json",
-    "image": "assets/images/doctor_4.png",
-    "mailid": "oliviabrown@example.com",
-    "officeNo": "456-789-0123"
-  },
-  {
-    "id": "12",
-    "name": "Dr. Ethan Johnson",
-    "qualification": "MBBS, MD",
-    "specialization": "General Surgeon",
-    "specialization_icon": "assets/lottie/heart_beat.json",
-    "image": "assets/images/doctor_1.png",
-    "mailid": "ethanjohnson@example.com",
-    "officeNo": "567-890-1234"
-  },
-  {
-    "id": "13",
-    "name": "Dr. Sophia Lee",
-    "qualification": "MBBS, MD",
-    "specialization": "Gynecologist",
-    "specialization_icon": "assets/lottie/heart_beat.json",
-    "image": "assets/images/doctor_3.png",
-    "mailid": "sophialee@example.com",
-    "officeNo": "678-901-2345"
-  },
-  {
-    "id": "14",
-    "name": "Dr. Daniel Miller",
-    "qualification": "MBBS, MD",
-    "specialization": "Ophthalmologist",
-    "specialization_icon": "assets/lottie/heart_beat.json",
-    "image": "assets/images/doctor_4.png",
-    "mailid": "danielmiller@example.com",
-    "officeNo": "789-012-3456"
-  },
-  {
-    "id": "15",
-    "name": "Dr. Ava Wilson",
-    "qualification": "MBBS, MD",
-    "specialization": "Orthopedic",
-    "specialization_icon": "assets/lottie/heart_beat.json",
-    "image": "assets/images/doctor_1.png",
-    "mailid": "avawilson@example.com",
-    "officeNo": "890-123-4567"
-  },
-  {
-    "id": "16",
-    "name": "Dr. Matthew Moore",
-    "qualification": "MBBS, MD",
-    "specialization": "ENT Specialist",
-    "specialization_icon": "assets/lottie/heart_beat.json",
-    "image": "assets/images/doctor_3.png",
-    "mailid": "matthewmoore@example.com",
-    "officeNo": "901-234-5678"
+    "officeNo": "901-234-5678",
+    "available": true
   }
 ]

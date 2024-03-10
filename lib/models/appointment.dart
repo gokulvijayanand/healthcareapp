@@ -1,10 +1,12 @@
 class Appointment {
   final String doctorId;
-  final String date;
-  final String timeSlot;
   final String slot;
   final String patientName;
+  final String timeSlot;
+  final String date;
   final int patientAge; // New patientAge field as int
+  final String address;
+  final String mobileNumber; // New mobileNumber field
   final String reason;
   final String status;
 
@@ -14,7 +16,9 @@ class Appointment {
     required this.timeSlot,
     required this.slot,
     required this.patientName,
-    required this.patientAge, // Initialize the patientAge
+    required this.patientAge,
+    required this.address, // Initialize the address
+    required this.mobileNumber, // Initialize the mobileNumber
     required this.reason,
     required this.status,
   });
@@ -26,7 +30,9 @@ class Appointment {
       timeSlot: json['timeSlot'],
       slot: json['slot'],
       patientName: json['patientName'],
-      patientAge: json['patientAge'], // Parse the patientAge from JSON
+      patientAge: json['patientAge'],
+      address: json['address'], // Parse the address from JSON
+      mobileNumber: json['mobileNumber'], // Parse the mobileNumber from JSON
       reason: json['reason'],
       status: json['status'],
     );

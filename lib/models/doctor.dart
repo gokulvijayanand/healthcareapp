@@ -7,6 +7,7 @@ class Doctor {
   final String image;
   final String mailid;
   final String officeNo;
+  final bool available; // New property added
 
   Doctor({
     required this.id,
@@ -17,6 +18,7 @@ class Doctor {
     required this.image,
     required this.mailid,
     required this.officeNo,
+    required this.available, // New property added
   });
 
   factory Doctor.fromJson(Map<String, dynamic> json) {
@@ -29,6 +31,7 @@ class Doctor {
       image: json['image'],
       mailid: json['mailid'],
       officeNo: json['officeNo'],
+      available: json['available'], // New property added
     );
   }
 

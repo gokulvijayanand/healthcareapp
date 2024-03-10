@@ -1,5 +1,10 @@
 import 'package:flutter/material.dart';
-import 'appointment_page.dart'; // Verify this import is correct
+import '../../models/appointment.dart';
+import 'appointment_page.dart';
+import 'dart:convert';
+import 'package:flutter/material.dart';
+import 'package:flutter/services.dart' show rootBundle;
+import 'package:intl/intl.dart';
 
 class DoctorHomePage extends StatefulWidget {
   const DoctorHomePage({Key? key}) : super(key: key);
@@ -10,30 +15,48 @@ class DoctorHomePage extends StatefulWidget {
 
 class _HomePageState extends State<DoctorHomePage> {
   int _selectedIndex = 0;
+  late Future<List<Appointment>> todaysAppointments;
 
-  // This function handles tab selection and optional navigation
+  @override
+  void initState() {
+    super.initState();
+    todaysAppointments = loadTodaysAppointments();
+  }
+
+  Future<List<Appointment>> loadTodaysAppointments() async {
+    final String response = await rootBundle.loadString('assets/data/appointments.json');
+    final List<dynamic> data = json.decode(response);
+    final DateFormat formatter = DateFormat('yyyy-MM-dd');
+    final String today = formatter.format(DateTime.now());
+
+    List<Appointment> todaysAppointments = data.map((json) => Appointment.fromJson(json)).where((appointment) {
+      return appointment.date == today && appointment.status == 'active';
+    }).toList();
+
+    return todaysAppointments;
+  }
+
   void _onItemTapped(int index) {
-    if (index == 1) {
-      // Navigate to the AppointmentPage when the second item is tapped
-      Navigator.push(context, MaterialPageRoute(builder: (context) => AppointmentPage()));
-    } else {
-      // Update the selected index for other tabs (e.g., home/welcome page)
-      setState(() {
-        _selectedIndex = index;
-      });
-    }
+    setState(() {
+      _selectedIndex = index;
+    });
+    // Navigate to the AppointmentPage if needed, etc.
   }
 
   @override
   Widget build(BuildContext context) {
+    List<Widget> _widgetOptions = [
+      WelcomePage(todaysAppointments: todaysAppointments), // Pass Future as a parameter
+      AppointmentPage(),
+      // Other pages as needed
+    ];
+
     return Scaffold(
       appBar: AppBar(
         title: Text("Welcome Doctor"),
       ),
       body: Center(
-        // Display content based on the selected index
-        // For simplicity, using WelcomePage for index 0, further logic can be added for more indices
-        child: _selectedIndex == 0 ? WelcomePage() : Container(),
+        child: _widgetOptions.elementAt(_selectedIndex),
       ),
       bottomNavigationBar: BottomNavigationBar(
         backgroundColor: Colors.amber,
@@ -46,6 +69,7 @@ class _HomePageState extends State<DoctorHomePage> {
             icon: Icon(Icons.people, color: Colors.deepPurple),
             label: 'Appointments',
           ),
+          // Additional tabs as needed
         ],
         currentIndex: _selectedIndex,
         selectedItemColor: Colors.deepPurple,
@@ -54,67 +78,39 @@ class _HomePageState extends State<DoctorHomePage> {
     );
   }
 }
-
 class WelcomePage extends StatelessWidget {
+  final Future<List<Appointment>> todaysAppointments;
+
+  const WelcomePage({Key? key, required this.todaysAppointments}) : super(key: key);
+
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      backgroundColor: Colors.white,
-      body: Center(
-        child: Text(
-          'Welcome, Doctor',
-          style: TextStyle(fontSize: 20.0, color: Colors.purple),
-        ),
-      ),
+    return FutureBuilder<List<Appointment>>(
+      future: todaysAppointments,
+      builder: (context, snapshot) {
+        if (snapshot.connectionState == ConnectionState.done) {
+          if (snapshot.hasError) {
+            return Center(child: Text("Error loading appointments."));
+          }
+          if (snapshot.data!.isEmpty) {
+            return Center(child: Text("No appointments for today."));
+          }
+          return ListView.builder(
+            itemCount: snapshot.data!.length,
+            itemBuilder: (context, index) {
+              Appointment appointment = snapshot.data![index];
+              return ListTile(
+                title: Text('Appointment with ${appointment.patientName}'),
+                subtitle: Text('Date: ${appointment.date}, Time: ${appointment.timeSlot}'),
+                // You can add more details or an onTap function here
+              );
+            },
+          );
+        } else {
+          return Center(child: CircularProgressIndicator());
+        }
+      },
     );
   }
 }
 
-class LoginPage extends StatefulWidget {
-  const LoginPage({Key? key}) : super(key: key);
-
-  @override
-  _LoginPageState createState() => _LoginPageState();
-}
-
-class _LoginPageState extends State<LoginPage> {
-  final TextEditingController _emailController = TextEditingController();
-  final TextEditingController _passwordController = TextEditingController();
-
-  void _login() {
-    print("Login with: ${_emailController.text}, ${_passwordController.text}");
-    // Here, add your login logic or navigation after successful login
-  }
-
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: Text("Login"),
-      ),
-      body: Padding(
-        padding: EdgeInsets.all(16.0),
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: <Widget>[
-            TextField(
-              controller: _emailController,
-              decoration: InputDecoration(hintText: 'Email'),
-            ),
-            SizedBox(height: 8),
-            TextField(
-              controller: _passwordController,
-              obscureText: true,
-              decoration: InputDecoration(hintText: 'Password'),
-            ),
-            SizedBox(height: 16),
-            ElevatedButton(
-              onPressed: _login,
-              child: Text('Login'),
-            ),
-          ],
-        ),
-      ),
-    );
-  }
-}

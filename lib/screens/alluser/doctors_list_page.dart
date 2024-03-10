@@ -33,10 +33,10 @@ class _DoctorsListPageState extends State<DoctorsListPage> {
 
   Future<void> loadDoctorsData() async {
     final String response =
-        await rootBundle.loadString('assets/data/doctors.json');
+    await rootBundle.loadString('assets/data/doctors.json');
     final List<dynamic> data = json.decode(response);
     List<Doctor> loadedDoctors =
-        data.map((data) => Doctor.fromJson(data)).toList();
+    data.map((data) => Doctor.fromJson(data)).toList();
 
     if (widget.specialization != null) {
       loadedDoctors = loadedDoctors
