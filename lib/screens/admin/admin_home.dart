@@ -7,7 +7,7 @@ import 'parients_list.dart'; // Updated filename to follow Dart's naming convent
 import 'register_Doctor.dart';
 // Import your other pages here
 
-class AdminUser extends StatelessWidget { // Corrected: Added 'class' keyword
+class AdminUser extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
@@ -15,9 +15,9 @@ class AdminUser extends StatelessWidget { // Corrected: Added 'class' keyword
       home: AdminHomePage(),
       // Define routes for navigating to other screens
       routes: {
-        '/doctors_list_page': (context) => DoctorsListPage(), // Corrected route name
+        '/doctors_list_page': (context) => DoctorsListPage(),
         '/register_Doctor': (context) => RegisterDoctorPage(),
-        '/appointmentspage_admin': (context) => AppointmentPageAdmin(), // Corrected route name
+        '/appointmentspage_admin': (context) => AppointmentPageAdmin(),
         '/patients_list': (context) => PatientsListPage(),
         '/patient_history_page': (context) => PatientHistoryPage(),
         '/book_appointment_page': (context) => BookAppointmentPage(),
@@ -32,9 +32,22 @@ class AdminHomePage extends StatefulWidget {
 }
 
 class _AdminHomePageState extends State<AdminHomePage> {
-  void navigateToSection(String routeName) {
-    Navigator.of(context).pushNamed(routeName);
+  int _selectedIndex = 0;
+
+  void _onItemTapped(int index) {
+    setState(() {
+      _selectedIndex = index;
+    });
   }
+
+  List<Widget> _widgetOptions = <Widget>[
+    DoctorsListPage(),
+    RegisterDoctorPage(),
+    AppointmentPageAdmin(),
+    PatientsListPage(),
+    PatientHistoryPage(),
+    BookAppointmentPage(),
+  ];
 
   @override
   Widget build(BuildContext context) {
@@ -45,22 +58,43 @@ class _AdminHomePageState extends State<AdminHomePage> {
       drawer: Drawer(
         child: ListView(
           children: <Widget>[
-            // Drawer items...
+            ListTile(
+              title: Text('Root User'),
+              onTap: () {
+                Navigator.of(context).pushNamed('/root_user_page');
+              },
+            ),
+            // Add more drawer items as needed
           ],
         ),
       ),
-      body: _buildDashboardContent(),
+      bottomNavigationBar: BottomNavigationBar(
+        backgroundColor: Colors.white,
+        // Setting background color to white
+        items: const <BottomNavigationBarItem>[
+          BottomNavigationBarItem(
+            icon: Icon(Icons.home, color: Colors.deepPurple),
+            label: 'Home',
+          ),
+          BottomNavigationBarItem(
+            icon: Icon(Icons.people, color: Colors.deepPurple),
+            label: 'Doctors',
+          ),
+          BottomNavigationBarItem(
+            icon: Icon(Icons.calendar_month, color: Colors.deepPurple),
+            label: 'Appointment',
+          ),
+          BottomNavigationBarItem(
+            icon: Icon(Icons.list, color: Colors.deepPurple),
+            label: 'Specializations',
+          ),
+        ],
+        currentIndex: _selectedIndex,
+        selectedItemColor: Colors.deepPurple, // Color for selected item (icon and text)
+        unselectedItemColor: Colors.grey, // Color for unselected items (icon and text)
+        onTap: _onItemTapped,
+      ),
+      body: _widgetOptions.elementAt(_selectedIndex),
     );
   }
-
-// Drawer items and dashboard content methods remain the same
 }
-
-
-  Widget _buildDashboardContent() {
-    // Implement your dashboard content here
-    return Container(); // Placeholder container for now
-  }
-
-
-

@@ -8,7 +8,7 @@
     "image": "assets/images/doctor_1.png",
     "mailid": "johndoe@example.com",
     "officeNo": "123-456-7890",
-    "available": true
+   "available": true
   },
   {
     "id": "2",

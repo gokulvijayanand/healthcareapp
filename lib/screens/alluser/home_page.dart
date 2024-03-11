@@ -7,7 +7,7 @@ import 'specialization_list_page.dart';
 import 'login_page.dart';
 import '../../models/doctor.dart';
 import 'doctor_detail_page.dart';
-import '../doctor/doctor_home_page';
+import 'package:myflutterproject/screens/doctor/doctor_home_page.dart';
 
 
 class HomePage extends StatefulWidget {
@@ -55,7 +55,7 @@ class _HomePageState extends State<HomePage> {
         child: _widgetOptions.elementAt(_selectedIndex),
       ),
       bottomNavigationBar: BottomNavigationBar(
-        backgroundColor: Colors.amber,
+        backgroundColor: Colors.white,
         // Setting background color to purple
         items: const <BottomNavigationBarItem>[
           BottomNavigationBarItem(
