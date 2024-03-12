@@ -32,7 +32,7 @@ class DoctorDetailPage extends StatelessWidget {
                     onPressed: () {
                       Navigator.push(
                         context,
-                        MaterialPageRoute(builder: (context) => AppointmentPage(doctor: doctor)),
+                        MaterialPageRoute(builder: (context) => AppointmentPage(doctorId: doctor.id)),
                       );
                     },
                     child: Text('Book Appointment'),

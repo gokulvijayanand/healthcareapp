@@ -37,4 +37,19 @@ class Appointment {
       status: json['status'],
     );
   }
+
+  Map<String, dynamic> toJson() {
+    return {
+      'doctorId': doctorId,
+      'date': date,
+      'timeSlot': timeSlot,
+      'slot': slot,
+      'patientName': patientName,
+      'patientAge': patientAge,
+      'address': address,
+      'mobileNumber': mobileNumber,
+      'reason': reason,
+      'status': status,
+    };
+  }
 }

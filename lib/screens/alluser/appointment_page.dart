@@ -1,244 +1,196 @@
 import 'dart:convert';
+
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
-import 'package:table_calendar/table_calendar.dart';
-import '../../models/doctor.dart';
-import '../../models/appointment.dart'; // Import the Appointment class
+import 'package:intl/intl.dart'; // For date formatting
+import 'package:http/http.dart' as http;
+import '../../models/appointment.dart'; // Ensure this path is correct.
 
 class AppointmentPage extends StatefulWidget {
-  final Doctor doctor;
+  final String doctorId;
 
-  const AppointmentPage({Key? key, required this.doctor}) : super(key: key);
+  const AppointmentPage({Key? key, required this.doctorId}) : super(key: key);
 
   @override
   _AppointmentPageState createState() => _AppointmentPageState();
 }
 
 class _AppointmentPageState extends State<AppointmentPage> {
-  late List<Appointment> appointments = [];
-  final TextEditingController _patientNameController = TextEditingController();
-  final TextEditingController _patientAgeController = TextEditingController();
-  final TextEditingController _addressController = TextEditingController();
-  final TextEditingController _mobileNumberController = TextEditingController();
-  final TextEditingController _reasonController = TextEditingController();
+  final _formKey = GlobalKey<FormState>();
 
-  CalendarFormat _calendarFormat = CalendarFormat.month;
-  DateTime _focusedDay = DateTime.now();
-  DateTime? _selectedDay;
-  late String _selectedTimeSlot; // Add this variable to hold the selected time slot
-  int? _age; // Add this variable to hold the calculated age
+  String _patientName = '';
+  int _age = 0;
+  String _selectedDate = DateFormat('yyyy-MM-dd').format(DateTime.now());
+  String _selectedSlot = 'Slot 1';
+  String _address = '';
+  String _mobileNumber = '';
+  String _reason = '';
 
-  @override
-  void initState() {
-    super.initState();
-    loadDoctorAppointments();
-  }
-
-  Future<void> loadDoctorAppointments() async {
-    // Load the appointment data from the JSON file
-    final String response =
-    await rootBundle.loadString('assets/data/appointments.json');
-    final data = json.decode(response);
-    // Assuming your JSON structure has an array of appointments for each doctor ID
-    final doctorAppointments = data.firstWhere(
-          (item) => item['doctorId'].toString() == widget.doctor.id,
-      orElse: () => {'appointments': []},
-    )['appointments'];
-    setState(() {
-      appointments = doctorAppointments
-          .map((item) => Appointment.fromJson(item))
-          .toList();
-    });
-  }
+  final List<String> _slots = ['Slot 1', 'Slot 2', 'Slot 3' ,'Slot 4'];
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Booking Appointment'),
+        title: Text('Book Appointment'),
       ),
-      body: SingleChildScrollView(
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.stretch,
-          children: [
-
-            Padding(
-              padding: EdgeInsets.all(8.0),
-              child: TextField(
-                controller: _patientNameController,
-                decoration: InputDecoration(
-                  labelText: 'Patient Name',
-                  border: OutlineInputBorder(),
-                ),
+      body: Padding(
+        padding: const EdgeInsets.all(16.0),
+        child: Form(
+          key: _formKey,
+          child: ListView(
+            children: <Widget>[
+              TextFormField(
+                decoration: InputDecoration(labelText: 'Patient Name'),
+                validator: (value) {
+                  if (value == null || value.isEmpty) {
+                    return 'Please enter patient name';
+                  }
+                  return null;
+                },
+                onSaved: (value) {
+                  _patientName = value!;
+                },
               ),
-            ),
-            Padding(
-              padding: EdgeInsets.all(8.0),
-              child: TextField(
-                controller: _patientAgeController,
-                decoration: InputDecoration(
-                  labelText: 'Date of Birth',
-                  border: OutlineInputBorder(),
-                ),
+              TextFormField(
+                decoration: InputDecoration(labelText: 'Age'),
+                keyboardType: TextInputType.number, // Set keyboard type to number
+                validator: (value) {
+                  if (value == null || value.isEmpty) {
+                    return 'Please enter age';
+                  }
+                  // Check if the entered value is a valid number
+                  final age = int.tryParse(value);
+                  if (age == null) {
+                    return 'Please enter a valid age';
+                  }
+                  // Additional validation can be added here if needed
+                  return null;
+                },
+                onSaved: (value) {
+                  // Convert the value to an integer and save it
+                  _age = int.parse(value!);
+                },
               ),
-            ),
-
-
-            Padding(
-              padding: EdgeInsets.all(8.0),
-              child: TextField(
-                controller: _addressController,
-                decoration: InputDecoration(
-                  labelText: 'Address',
-                  border: OutlineInputBorder(),
-                ),
+              ListTile(
+                title: Text('Appointment Date'),
+                subtitle: Text(_selectedDate),
+                onTap: () async {
+                  final DateTime? picked = await showDatePicker(
+                    context: context,
+                    initialDate: DateTime.now(),
+                    firstDate: DateTime.now(),
+                    lastDate: DateTime(DateTime.now().year + 1),
+                  );
+                  if (picked != null) {
+                    setState(() {
+                      _selectedDate = DateFormat('yyyy-MM-dd').format(picked);
+                    });
+                  }
+                },
               ),
-            ),
-            Padding(
-              padding: EdgeInsets.all(8.0),
-              child: TextField(
-                controller: _mobileNumberController,
-                decoration: InputDecoration(
-                  labelText: 'Mobile Number',
-                  border: OutlineInputBorder(),
-                ),
+              DropdownButtonFormField<String>(
+                decoration: InputDecoration(labelText: 'Slot'),
+                value: _selectedSlot,
+                items: _slots
+                    .map((slot) => DropdownMenuItem(
+                  child: Text(slot),
+                  value: slot,
+                ))
+                    .toList(),
+                onChanged: (value) {
+                  setState(() {
+                    _selectedSlot = value!;
+                  });
+                },
               ),
-            ),
-            Padding(
-              padding: EdgeInsets.all(8.0),
-              child: TextField(
-                controller: _reasonController,
-                decoration: InputDecoration(
-                  labelText: 'Reason for Appointment',
-                  border: OutlineInputBorder(),
-                ),
+              TextFormField(
+                decoration: InputDecoration(labelText: 'Address'),
+                validator: (value) {
+                  if (value == null || value.isEmpty) {
+                    return 'Please enter address';
+                  }
+                  return null;
+                },
+                onSaved: (value) {
+                  _address = value!;
+                },
               ),
-            ),
-            ElevatedButton(
-              onPressed: () {
-                confirmAppointment();
-              },
-              child: Text('Confirm Appointment'),
-            ),
-          ],
+              TextFormField(
+                decoration: InputDecoration(labelText: 'Mobile Number'),
+                keyboardType: TextInputType.phone,
+                maxLength: 10,
+                validator: (value) {
+                  if (value == null || value.isEmpty || value.length != 10) {
+                    return 'Please enter a valid 10 digit mobile number';
+                  }
+                  return null;
+                },
+                onSaved: (value) {
+                  _mobileNumber = value!;
+                },
+              ),
+              TextFormField(
+                decoration: InputDecoration(labelText: 'Reason for Appointment'),
+                validator: (value) {
+                  if (value == null || value.isEmpty) {
+                    return 'Please enter reason for appointment';
+                  }
+                  return null;
+                },
+                onSaved: (value) {
+                  _reason = value!;
+                },
+              ),
+              SizedBox(height: 20),
+              ElevatedButton(
+                onPressed: () {
+                  if (_formKey.currentState!.validate()) {
+                    _formKey.currentState!.save();
+                    _submitForm();
+                  }
+                },
+                child: Text('Submit'),
+              ),
+            ],
+          ),
         ),
       ),
     );
   }
 
-  void confirmAppointment() {
-    String slot = '';
-
-    if (_selectedTimeSlot == '8:00 am - 10:00 am') {
-      slot = '1';
-    } else if (_selectedTimeSlot == '10:15 am - 12:00 pm') {
-      slot = '2';
-    } else if (_selectedTimeSlot == '1:00 pm - 3:00 pm') {
-      slot = '3';
-    } else if (_selectedTimeSlot == '6:00 pm - 9:00 pm') {
-      slot = '4';
-    }
-
-    final appointment = Appointment(
-      doctorId: widget.doctor.id,
-      date: _selectedDay.toString(),
-      timeSlot: _selectedTimeSlot,
-      patientName: _patientNameController.text,
-      patientAge: _age ?? 0,
-      address: _addressController.text,
-      mobileNumber: _mobileNumberController.text,
-      reason: _reasonController.text,
+  void _submitForm() async {
+    // Prepare appointment object
+    Appointment appointment = Appointment(
+      doctorId: widget.doctorId,
+      date: _selectedDate,
+      timeSlot: '', // Add logic to determine time slot
+      slot: _selectedSlot,
+      patientName: _patientName,
+      patientAge: _age,
+      address: _address,
+      mobileNumber: _mobileNumber,
+      reason: _reason,
       status: 'active',
-      slot: slot,
     );
 
-    // Add the appointment to the list of appointments
-    setState(() {
-      appointments.add(appointment);
-    });
+    // Convert appointment object to JSON
+    Map<String, dynamic> jsonData = appointment.toJson();
 
-    // Save the updated appointments list to the JSON file
-    // Here, you would typically update your backend server with the new appointment
-    // For simplicity, we'll just print the JSON representation of the appointment
-    print(json.encode(appointment));
-
-    // Clear the form fields
-    _patientNameController.clear();
-    _patientAgeController.clear();
-    _addressController.clear();
-    _mobileNumberController.clear();
-    _reasonController.clear();
-  }
-
-  void _showCalendar() {
-    showModalBottomSheet(
-      context: context,
-      builder: (BuildContext builder) {
-        return Container(
-          height: MediaQuery.of(context).size.height * 0.75,
-          child: TableCalendar(
-            focusedDay: _focusedDay,
-            firstDay: DateTime(2010),
-            lastDay: DateTime(2030),
-            calendarFormat: _calendarFormat,
-            selectedDayPredicate: (day) {
-              return isSameDay(day, _selectedDay);
-            },
-            onDaySelected: (selectedDay, focusedDay) {
-              setState(() {
-                _selectedDay = selectedDay;
-              });
-              Navigator.pop(context);
-            },
-          ),
-        );
+    // Send POST request
+    final response = await http.post(
+      Uri.parse('http://127.0.0.1/appointment'),
+      headers: <String, String>{
+        'Content-Type': 'application/json', // Set content type header
       },
+      body: jsonEncode(jsonData), // Encode appointment data to JSON string
     );
+
+    if (response.statusCode == 200) {
+      // Appointment booked successfully
+      print('Appointment booked successfully');
+    } else {
+      // Error occurred while booking appointment
+      print('Error occurred while booking appointment');
+    }
   }
-
-  void _showTimeSlots() {
-    showModalBottomSheet(
-      context: context,
-      builder: (BuildContext context) {
-        return Container(
-          height: 300,
-          child: Column(
-            children: [
-              _buildTimeSlotButton('8:00 am - 10:00 am'),
-              _buildTimeSlotButton('10:15 am - 12:00 pm'),
-              _buildTimeSlotButton('1:00 pm - 3:00 pm'),
-              _buildTimeSlotButton('6:00 pm - 9:00 pm'),
-            ],
-          ),
-        );
-      },
-    );
-  }
-
-  Widget _buildTimeSlotButton(String timeSlot) {
-    return Padding(
-      padding: EdgeInsets.symmetric(vertical: 8.0, horizontal: 16.0),
-      child: ElevatedButton(
-        onPressed: () {
-          // Handle time slot selection
-          print('Selected Time Slot: $timeSlot');
-          _selectedTimeSlot = timeSlot; // Update the selected time slot
-        },
-        child: Text(timeSlot),
-      ),
-    );
-  }
-
-  bool isSameDay(DateTime day1, DateTime? day2) {
-    if (day2 == null) return false;
-    return day1.year == day2.year &&
-        day1.month == day2.month &&
-        day1.day == day2.day;
-  }
-
-
-
-
-  }
-
-
+}
