@@ -3,7 +3,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import '../../models/doctor.dart';
 import 'doctor_detail_page.dart'; // Ensure this import path is correct
-import 'package:http/http.dart' as http;
 
 class DoctorsListPage extends StatefulWidget {
   final String? specialization;
@@ -59,6 +58,7 @@ class _DoctorsListPageState extends State<DoctorsListPage> {
     final filteredDoctors = _doctors.where((doctor) {
       final doctorNameLower = doctor.name.toLowerCase();
       final searchLower = query.toLowerCase();
+
       return doctorNameLower.contains(searchLower);
     }).toList();
 

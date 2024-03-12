@@ -1,9 +1,9 @@
+import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:table_calendar/table_calendar.dart';
 import '../../models/doctor.dart';
 import '../../models/appointment.dart'; // Import the Appointment class
-import 'dart:convert';
 
 class AppointmentPage extends StatefulWidget {
   final Doctor doctor;
@@ -17,8 +17,6 @@ class AppointmentPage extends StatefulWidget {
 class _AppointmentPageState extends State<AppointmentPage> {
   late List<Appointment> appointments = [];
   final TextEditingController _patientNameController = TextEditingController();
-  final TextEditingController _timeSlotController = TextEditingController();
-  final TextEditingController _dateController = TextEditingController();
   final TextEditingController _patientAgeController = TextEditingController();
   final TextEditingController _addressController = TextEditingController();
   final TextEditingController _mobileNumberController = TextEditingController();
@@ -28,6 +26,7 @@ class _AppointmentPageState extends State<AppointmentPage> {
   DateTime _focusedDay = DateTime.now();
   DateTime? _selectedDay;
   late String _selectedTimeSlot; // Add this variable to hold the selected time slot
+  int? _age; // Add this variable to hold the calculated age
 
   @override
   void initState() {
@@ -62,27 +61,7 @@ class _AppointmentPageState extends State<AppointmentPage> {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: [
-            SizedBox(
-              width: 120,
-              height: 80,
-              child: ElevatedButton(
-                onPressed: () {
-                  _showCalendar();
-                },
-                child: Text('Select Date'),
-              ),
-            ),
-            SizedBox(height: 20),
-            SizedBox(
-              width: 120,
-              height: 80,
-              child: ElevatedButton(
-                onPressed: () {
-                  _showTimeSlots();
-                },
-                child: Text('Select Time'),
-              ),
-            ),
+
             Padding(
               padding: EdgeInsets.all(8.0),
               child: TextField(
@@ -96,23 +75,15 @@ class _AppointmentPageState extends State<AppointmentPage> {
             Padding(
               padding: EdgeInsets.all(8.0),
               child: TextField(
-                controller: _dateController,
-                decoration: InputDecoration(
-                  labelText: 'Date',
-                  border: OutlineInputBorder(),
-                ),
-              ),
-            ),
-            Padding(
-              padding: EdgeInsets.all(8.0),
-              child: TextField(
                 controller: _patientAgeController,
                 decoration: InputDecoration(
-                  labelText: 'Patient Age',
+                  labelText: 'Date of Birth',
                   border: OutlineInputBorder(),
                 ),
               ),
             ),
+
+
             Padding(
               padding: EdgeInsets.all(8.0),
               child: TextField(
@@ -170,10 +141,10 @@ class _AppointmentPageState extends State<AppointmentPage> {
 
     final appointment = Appointment(
       doctorId: widget.doctor.id,
-      date: _selectedDay.toString(), // Assuming _selectedDay is the selected date from the calendar
+      date: _selectedDay.toString(),
       timeSlot: _selectedTimeSlot,
       patientName: _patientNameController.text,
-      patientAge: int.parse(_patientAgeController.text),
+      patientAge: _age ?? 0,
       address: _addressController.text,
       mobileNumber: _mobileNumberController.text,
       reason: _reasonController.text,
@@ -193,7 +164,6 @@ class _AppointmentPageState extends State<AppointmentPage> {
 
     // Clear the form fields
     _patientNameController.clear();
-    _dateController.clear();
     _patientAgeController.clear();
     _addressController.clear();
     _mobileNumberController.clear();
@@ -252,7 +222,6 @@ class _AppointmentPageState extends State<AppointmentPage> {
         onPressed: () {
           // Handle time slot selection
           print('Selected Time Slot: $timeSlot');
-          _timeSlotController.text = timeSlot;
           _selectedTimeSlot = timeSlot; // Update the selected time slot
         },
         child: Text(timeSlot),
@@ -266,4 +235,10 @@ class _AppointmentPageState extends State<AppointmentPage> {
         day1.month == day2.month &&
         day1.day == day2.day;
   }
-}
+
+
+
+
+  }
+
+
