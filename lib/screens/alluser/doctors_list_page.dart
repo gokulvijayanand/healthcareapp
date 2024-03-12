@@ -1,7 +1,8 @@
 import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import '../../models/doctor.dart';
+import 'package:http/http.dart' as http; // Import http package
+import 'package:myflutterproject/models/doctor.dart';
 import 'doctor_detail_page.dart'; // Ensure this import path is correct
 
 class DoctorsListPage extends StatefulWidget {
@@ -32,22 +33,25 @@ class _DoctorsListPageState extends State<DoctorsListPage> {
   }
 
   Future<void> loadDoctorsData() async {
-    final String response =
-    await rootBundle.loadString('assets/data/doctors.json');
-    final List<dynamic> data = json.decode(response);
-    List<Doctor> loadedDoctors =
-    data.map((data) => Doctor.fromJson(data)).toList();
+    final response = await http.get(Uri.parse('http://10.0.2.2/doctor.json')); // Fetch data from external URL
+    if (response.statusCode == 200) {
+      final List<dynamic> data = json.decode(response.body);
+      List<Doctor> loadedDoctors =
+      data.map((data) => Doctor.fromJson(data)).toList();
 
-    if (widget.specialization != null) {
-      loadedDoctors = loadedDoctors
-          .where((doctor) => doctor.specialization == widget.specialization)
-          .toList();
+      if (widget.specialization != null) {
+        loadedDoctors = loadedDoctors
+            .where((doctor) => doctor.specialization == widget.specialization)
+            .toList();
+      }
+
+      setState(() {
+        _doctors = loadedDoctors;
+        _filteredDoctors = loadedDoctors; // Initialize with all doctors
+      });
+    } else {
+      throw Exception('Failed to load doctors data');
     }
-
-    setState(() {
-      _doctors = loadedDoctors;
-      _filteredDoctors = loadedDoctors; // Initialize with all doctors
-    });
   }
 
   void _onSearchChanged() {
@@ -136,6 +140,5 @@ class _DoctorsListPageState extends State<DoctorsListPage> {
         ],
       ),
     );
-
   }
 }

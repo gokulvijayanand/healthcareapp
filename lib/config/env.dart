@@ -1,3 +1,3 @@
 class Env {
-  static const String BASE_URL = 'http://127.0.0.1::80';
+  static const String BASE_URL = 'http://10.0.2.2';
 }
