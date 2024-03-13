@@ -1,13 +1,14 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import '../../widgets/home_card.dart';
+import '../chatbot/chatbot.dart';
 import 'doctors_list_page.dart';
 import 'appointment_booking_page.dart';
 import 'specialization_list_page.dart';
 import 'login_page.dart';
 import '../../models/doctor.dart';
 import 'doctor_detail_page.dart';
-import 'package:myflutterproject/screens/doctor/doctor_home_page.dart';
+import '../doctor/doctor_home_page.dart';
 
 
 class HomePage extends StatefulWidget {
@@ -23,7 +24,7 @@ class _HomePageState extends State<HomePage> {
   static List<Widget> _widgetOptions = <Widget>[
     WelcomePage(), // Welcome page added
     DoctorsListPage(),
-    AppointmentBookingPage(),
+    ChatPage(),
     SpecializationListPage(),
   ];
 
@@ -55,7 +56,7 @@ class _HomePageState extends State<HomePage> {
         child: _widgetOptions.elementAt(_selectedIndex),
       ),
       bottomNavigationBar: BottomNavigationBar(
-        backgroundColor: Colors.white,
+        backgroundColor: Colors.amber,
         // Setting background color to purple
         items: const <BottomNavigationBarItem>[
           BottomNavigationBarItem(
@@ -67,8 +68,8 @@ class _HomePageState extends State<HomePage> {
             label: 'Doctors',
           ),
           BottomNavigationBarItem(
-            icon: Icon(Icons.calendar_month,color: Colors.deepPurple),
-            label: 'Appointment',
+            icon: Icon(Icons.messenger_rounded,color: Colors.deepPurple),
+            label: 'chatbot',
           ),
           BottomNavigationBarItem(
             icon: Icon(Icons.list,color: Colors.deepPurple),
@@ -109,4 +110,61 @@ class WelcomePage extends StatelessWidget {
     );
   }
 }
+class LoginPage extends StatefulWidget {
+  const LoginPage({Key? key}) : super(key: key);
 
+  @override
+  _LoginPageState createState() => _LoginPageState();
+}
+
+class _LoginPageState extends State<LoginPage> {
+  final TextEditingController _emailController = TextEditingController();
+  final TextEditingController _passwordController = TextEditingController();
+
+  void _login() {
+    // Implement your login logic here
+    print("Login with: ${_emailController.text}, ${_passwordController.text}");
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(
+        title: Text("Login"),
+      ),
+      body: Padding(
+        padding: EdgeInsets.all(16.0),
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: <Widget>[
+            TextField(
+              controller: _emailController,
+              decoration: InputDecoration(
+                hintText: 'Email',
+              ),
+            ),
+            SizedBox(height: 8),
+            TextField(
+              controller: _passwordController,
+              obscureText: true,
+              decoration: InputDecoration(
+                hintText: 'Password',
+              ),
+            ),
+            SizedBox(height: 16),
+            ElevatedButton(
+              onPressed: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: (context) => DoctorHomePage()), // Assuming DoctorHomePage is your class name
+                );
+              },
+              child: Text('Login'),
+            ),
+
+          ],
+        ),
+      ),
+    );
+  }
+}

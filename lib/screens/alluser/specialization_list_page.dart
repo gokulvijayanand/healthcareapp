@@ -2,6 +2,7 @@ import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:lottie/lottie.dart'; // Import the lottie package
+import '../../config/env.dart';
 import '../../models/doctor.dart'; // Ensure this import is correct
 import 'doctors_list_page.dart'; // Ensure this import is correct
 
@@ -21,7 +22,7 @@ class _SpecializationListPageState extends State<SpecializationListPage> {
   }
 
   Future<void> loadSpecializations() async {
-    final String response = await rootBundle.loadString('assets/data/doctors.json');
+    final String response = await rootBundle.loadString('${Env.BASE_URL}.json');
     final List<dynamic> data = json.decode(response);
     final List<Doctor> doctors = data.map((data) => Doctor.fromJson(data)).toList();
 
