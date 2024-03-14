@@ -1,39 +1,39 @@
 class Doctor {
-  final String id;
+  final int user;
+  final int id;
   final String name;
-  final String qualification;
+  final String qualifications;
   final String specialization;
-  final String specialization_icon;
   final String image;
-  final String mailid;
-  final String officeNo;
-  final bool available; // New property added
+  final String email;
+  final String office_number;
+  final bool available;
 
   Doctor({
+    required this.user,
     required this.id,
     required this.name,
-    required this.qualification,
+    required this.qualifications,
     required this.specialization,
-    required this.specialization_icon,
     required this.image,
-    required this.mailid,
-    required this.officeNo,
-    required this.available, // New property added
+    required this.email,
+    required this.office_number,
+    required this.available,
   });
 
   factory Doctor.fromJson(Map<String, dynamic> json) {
     return Doctor(
-      id: json['id'],
-      name: json['name'],
-      qualification: json['qualification'],
-      specialization: json['specialization'],
-      specialization_icon: json['specialization_icon'],
-      image: json['image'],
-      mailid: json['mailid'],
-      officeNo: json['officeNo'],
-      available: json['available'], // New property added
+      user: json['user'] ?? 0,
+      id: json['id'] ?? 0,
+      name: json['name'] ?? '',
+      qualifications: json['qualifications'] ?? '',
+      specialization: json['specialization'] ?? '',
+      image: json['image'] ?? '',
+      email: json['email'] ?? '',
+      office_number: json['office_number'] ?? '',
+      available: json['available'] ?? false,
     );
   }
 
-  String get imageUrl => image; // Corrected getter method
+  String get imageUrl => image;
 }

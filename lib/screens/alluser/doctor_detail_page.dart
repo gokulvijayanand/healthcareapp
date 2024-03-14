@@ -13,7 +13,7 @@ class DoctorDetailPage extends StatelessWidget {
       appBar: AppBar(
         title: Text(doctor.name),
       ),
-      body: SingleChildScrollView( // Use SingleChildScrollView for a simple scrollable layout
+      body: SingleChildScrollView(
         child: Column(
           children: [
             Image.asset(doctor.image, width: double.infinity, fit: BoxFit.cover),
@@ -24,15 +24,15 @@ class DoctorDetailPage extends StatelessWidget {
                 children: [
                   Text('Name: ${doctor.name}', style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold)),
                   Text('Specialization: ${doctor.specialization}', style: TextStyle(fontSize: 20)),
-                  Text('Qualification: ${doctor.qualification}', style: TextStyle(fontSize: 18)),
-                  Text('Email: ${doctor.mailid}', style: TextStyle(fontSize: 16)), // Assuming it's `email` not `mailid`
-                  Text('Office No: ${doctor.officeNo}', style: TextStyle(fontSize: 16)),
+                  Text('Qualifications: ${doctor.qualifications}', style: TextStyle(fontSize: 18)), // Changed to 'qualifications'
+                  Text('Email: ${doctor.email}', style: TextStyle(fontSize: 16)), // Changed from 'mailid'
+                  Text('Office No: ${doctor.office_number}', style: TextStyle(fontSize: 16)), // Changed from 'officeNo'
                   Text('ID: ${doctor.id}', style: TextStyle(fontSize: 16)),
                   ElevatedButton(
                     onPressed: () {
                       Navigator.push(
                         context,
-                        MaterialPageRoute(builder: (context) => AppointmentPage(doctorId: doctor.id)),
+                        MaterialPageRoute(builder: (context) => AppointmentPage(doctorId: doctor.id.toString())),
                       );
                     },
                     child: Text('Book Appointment'),

@@ -59,7 +59,7 @@ class _AppointmentPageState extends State<BookAppointmentPage> {
             title: Text(doctor.name),
             subtitle: Text(doctor.specialization),
             onTap: () {
-              List<Appointment> doctorAppointments = getAppointmentsForDoctor(doctor.id);
+              List<Appointment> doctorAppointments = getAppointmentsForDoctor(doctor.id.toString());
               Navigator.push(
                 context,
                 MaterialPageRoute(
